@@ -1,8 +1,9 @@
 #include "funciones.h"
+#define largoLinea 256
 
 Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capacidad)
 {
-    char linea[256];
+    char linea[largoLinea];
     char *token;
     Transferencia *temp;
     FILE *arch = fopen("transferencias_personales_clean.csv", "r");
@@ -30,38 +31,44 @@ Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capa
 
         // 1. ANIO
         token = strtok(linea, ";");
-        if (token != NULL) {
+        if (token != NULL)
+        {
             (vec + *ce)->anio = atoi(token);
         }
 
 
         // 2. TRIMESTRE
         token = strtok(NULL, ";");
-        if (token != NULL) {
+        if (token != NULL)
+        {
             (vec + *ce)->trimestre = atoi(token);
         }
 
         // 3. PAIS_COD
         token = strtok(NULL, ";");
-        if (token != NULL) {
+        if (token != NULL)
+        {
             strcpy((vec + *ce)->paisCod, token);
         }
 
         // 4. PAIS_DESC
         token = strtok(NULL, ";");
-        if (token != NULL) {
+        if (token != NULL)
+        {
             strcpy((vec + *ce)->paisDesc, token);
         }
 
         // 5. OPERACION
         token = strtok(NULL, ";");
-        if (token != NULL) {
+        if (token != NULL)
+        {
             (vec + *ce)->operacion = token[0];
         }
 
         // 6. MONTO
         token = strtok(NULL, "\r\n");
-        if (token != NULL) {
+        if (token != NULL)
+        {
             (vec + *ce)->monto = atof(token);
         }
 
@@ -78,21 +85,15 @@ Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capa
     // Recorremos el vector desde el índice 0 hasta la cantidad de elementos (ce)
     for (size_t i = 0; i < *ce; i++)
     {
-        printf("Anio: %d | Trim: %d | Pais: %s (%s) | Operacion: %c | Monto: %.2f\n",
-               vec->anio,
-               vec->trimestre,
-              vec->paisCod,
-               vec->paisDesc,
-               vec->operacion,
-              vec->monto);
-
+        printf("Anio: %d | Trim: %d | Pais: %s (%s) | Operacion: %c | Monto: %.2f\n", vec->anio, vec->trimestre, vec->paisCod, vec->paisDesc, vec->operacion, vec->monto);
         vec++;
     }
     printf("--------------------------------\n");
 }
+
 Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capacidad)
 {
-    char linea[256];
+    char linea[largoLinea];
     char *token;
     FILE *arch = fopen("paises_continentes.csv", "r");
 
@@ -111,7 +112,8 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
             *capacidad *= 2;
             Paises_continente *temp = (Paises_continente *)realloc(vec, (*capacidad) * sizeof(Paises_continente));
 
-            if (temp == NULL) {
+            if (temp == NULL)
+            {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
                 break;
             }
@@ -153,9 +155,7 @@ void mostrarPaises(Paises_continente *vec, size_t* ce)
     // Recorremos el vector desde el índice 0 hasta la cantidad de elementos (ce)
     for (size_t i = 0; i < *ce; i++)
     {
-        printf("Pais: %s (%s) |Continente: %s\n",
-               vec->paisCod, vec->paisDesc, vec->continente);
-
+        printf("Pais: %s (%s) |Continente: %s\n", vec->paisCod, vec->paisDesc, vec->continente);
         vec++;
     }
     printf("--------------------------------\n");
@@ -177,10 +177,12 @@ Pais *lecturaAgrupamientoPais(Pais *vec,Transferencia *vecTransferencia ,size_t 
                 encontrado=1;
                 vec->cantRegistros += 1;
 
-                if(vecTransferencia->operacion == 'C') {
+                if(vecTransferencia->operacion == 'C')
+                {
                     vec->total_credito += vecTransferencia->monto;
                 }
-                if (vecTransferencia->operacion == 'D') {
+                if (vecTransferencia->operacion == 'D')
+                {
                     vec->total_debito += vecTransferencia->monto;
                 }
                 break;
@@ -215,25 +217,21 @@ Pais *lecturaAgrupamientoPais(Pais *vec,Transferencia *vecTransferencia ,size_t 
                 vec->total_credito = 0.0;
                 vec->total_debito = 0.0;
 
-                if(vecTransferencia->operacion == 'C') {
+                if(vecTransferencia->operacion == 'C')
+                {
                     vec->total_credito = vecTransferencia->monto;
                 }
-                if (vecTransferencia->operacion == 'D') {
+                if (vecTransferencia->operacion == 'D')
+                {
                     vec->total_debito = vecTransferencia->monto;
                 }
                 *cePais +=1;
             }
-
-
-
         vecTransferencia++;
-   }
-
-
-
-
+    }
     return aux;
 }
+
 void ordenarResumenPais(Pais *vec, size_t *cePais)
 {
     Pais *aux, reemplazo;
@@ -269,12 +267,7 @@ void mostrarResumenPais(Pais *vec, size_t* cePais)
         // %-5s: string alineado a la izquierda ocupando 5 espacios
         // %-10d: número entero alineado a la izquierda ocupando 10 espacios
         // %.2f: número flotante (double/float) mostrando solo 2 decimales
-        printf("%-5s | %-25s | %-10d | %-15.2f | %-15.2f\n",
-               vec->paisCod,
-               vec->paisDesc,
-               vec->cantRegistros,
-               vec->total_credito,
-               vec->total_debito);
+        printf("%-5s | %-25s | %-10d | %-15.2f | %-15.2f\n", vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_credito, vec->total_debito);
 
         // Avanzamos el puntero al siguiente país
         vec++;
@@ -315,26 +308,24 @@ Continente *ResumenContinentes(Continente *vecContinente, size_t *ceContinentes,
                         if(*ceContinentes == *capacidadContinentes)
                         {
                             *capacidadContinentes *=2;
-                        auxContinente = (Continente *)realloc(auxContinente, (*capacidadContinentes)* sizeof(Continente));
-                        if(auxContinente == NULL)
-                        {
-                            printf("\nError al redimensionar vecContinente");
-                            break;
+                            auxContinente = (Continente *)realloc(auxContinente, (*capacidadContinentes)* sizeof(Continente));
+                            if(auxContinente == NULL)
+                            {
+                                printf("\nError al redimensionar vecContinente");
+                                break;
+                            }
+                            vecContinente=auxContinente;
+                            k=0;
+                            while(k< *ceContinentes)
+                            {
+                                vecContinente++;
+                                k++;
+                            }
                         }
-                        vecContinente=auxContinente;
-                        k=0;
-                        while(k< *ceContinentes)
-                        {
-                            vecContinente++;
-                            k++;
-                        }
-
-                    }
                     strcpy(vecContinente->continente,vecPaisesCont->continente);
                     vecContinente->cantRegistros =0;
                     vecContinente->total_credito =0;
                     vecContinente->total_debito  =0;
-
 
                     vecContinente->cantRegistros += vecPaises->cantRegistros;
                     vecContinente->total_credito += vecPaises->total_credito;
@@ -346,11 +337,10 @@ Continente *ResumenContinentes(Continente *vecContinente, size_t *ceContinentes,
             vecPaisesCont++;
         }
         vecPaises++;
-
     }
-
     return auxContinente;
 }
+
 void ordenarContinente(Continente *vecContinente, size_t *ceContinente)
 {
     Continente *aux, reemplazo;
@@ -383,11 +373,7 @@ void mostrarContinentesGuardados(Continente *vecContinente, size_t *ceContinente
 
     for(size_t i = 0; i < *ceContinentes; i++)
     {
-        printf("%-20s | %-10d | %-15.2f | %-15.2f\n",
-               vecContinente->continente,
-               vecContinente->cantRegistros,
-               vecContinente->total_credito,
-               vecContinente->total_debito);
+        printf("%-20s | %-10d | %-15.2f | %-15.2f\n", vecContinente->continente, vecContinente->cantRegistros, vecContinente->total_credito, vecContinente->total_debito);
 
         vecContinente++;
     }
@@ -407,7 +393,6 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
 
     for(i = 0 ; i < *ceTransferencia ; i++)
     {
-
         creado = 0;
         vecTrimestre=aux;
         saldo = 0;
@@ -428,23 +413,21 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
                 switch(vecTransferencia->trimestre)
                 {
                     case 1:
-                    vecTrimestre->t1 += saldo;
-                    break;
+                        vecTrimestre->t1 += saldo;
+                        break;
 
                     case 2:
-                    vecTrimestre->t2 += saldo;
-                    break;
+                        vecTrimestre->t2 += saldo;
+                        break;
 
                     case 3:
-                    vecTrimestre->t3 += saldo;
-                    break;
+                        vecTrimestre->t3 += saldo;
+                        break;
 
                     case 4:
-                    vecTrimestre->t4 += saldo;
-                    break;
+                        vecTrimestre->t4 += saldo;
+                        break;
                 }
-
-
             }
             vecTrimestre++;
         }
@@ -486,24 +469,22 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
             switch(vecTransferencia->trimestre)
                 {
                     case 1:
-                    vecTrimestre->t1 += saldo;
-                    break;
+                        vecTrimestre->t1 += saldo;
+                        break;
 
                     case 2:
-                    vecTrimestre->t2 += saldo;
-                    break;
+                        vecTrimestre->t2 += saldo;
+                        break;
 
                     case 3:
-                    vecTrimestre->t3 += saldo;
-                    break;
+                        vecTrimestre->t3 += saldo;
+                        break;
 
                     case 4:
-                    vecTrimestre->t4 += saldo;
-                    break;
+                        vecTrimestre->t4 += saldo;
+                        break;
                 }
-
         }
-
 
         vecTransferencia++;
     }
@@ -533,7 +514,28 @@ void mostrarSaldoTrimestral(SaldoTrimestral *vec, size_t *ce)
     }
     printf("----------------------------------------------------------------------------------------\n");
 }
+void ordenarSaldoTrimestral(SaldoTrimestral *vecTrimestre, size_t *ceTrimestre)
+{
+    SaldoTrimestral *aux, reemplazo;
+    size_t i,j;
 
+    for(i=0; i< *ceTrimestre -1; i++)
+    {
+        aux = vecTrimestre;
+        for(j=0 ; j< *ceTrimestre-i-1 ; j++)
+        {
+            if(strcmp(aux->paisDesc, (aux+1)->paisDesc)>0)
+             {   
+                reemplazo = *(aux+1);
+                *(aux+1) = *aux;
+                *aux = reemplazo;
+             }
+             aux++;
+        }
+
+    }
+
+}
 int archivoTxtSaldo (SaldoTrimestral *vecTrimestre, size_t *cantidadTrimeste)
 {
     size_t i;
@@ -559,9 +561,11 @@ int archivoTxtSaldo (SaldoTrimestral *vecTrimestre, size_t *cantidadTrimeste)
                vecTrimestre->t3,
                vecTrimestre->t4);
 
-       vecTrimestre++;        
+       vecTrimestre++;
     }
     fprintf(arch,"----------------------------------------------------------------------------------------");
+
+    return 1;
 }
 
 

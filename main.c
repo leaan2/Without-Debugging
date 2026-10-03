@@ -5,7 +5,6 @@ int main()
     Transferencia *vec;
     size_t capacidadTransferencias = 10, cantidadTransferencias=0;
 
-
     Paises_continente *vecPaises;
     size_t capacidadPaises = 10, cantidadPaises=0;
 
@@ -48,9 +47,12 @@ int main()
     ordenarContinente(vecContinentes, &cantidadContinentes);
     mostrarContinentesGuardados(vecContinentes, &cantidadContinentes);
 
+    // PUNTO 3 
     vecTrimestre = calculoTrimestre(vecTrimestre, &cantidadTrimestre, &capacidadTrimestre, vec, &cantidadTransferencias);
+    ordenarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
     mostrarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
     archivoTxtSaldo(vecTrimestre, &cantidadTrimestre);
+
 
 
     free(vec);

@@ -4,29 +4,32 @@
 #include <stdlib.h>
 #include <string.h>
 #define SIN_MEM -1
+#define largoPaisCod 4
+#define largoPaisDesc 50
+#define largoContinente 30
 
 typedef struct
 {
     int anio;
     int trimestre;
-    char paisCod[4];
-    char paisDesc[50];
+    char paisCod[largoPaisCod];
+    char paisDesc[largoPaisDesc];
     char operacion;
     float monto;
 } Transferencia;
 
 typedef struct
 {
-    char paisCod[4];
-    char paisDesc[50];
-    char continente[50];
+    char paisCod[largoPaisCod];
+    char paisDesc[largoPaisDesc];
+    char continente[largoContinente];
 }Paises_continente;
 
 
 typedef struct
 {
-    char paisCod[4];
-    char paisDesc[50];
+    char paisCod[largoPaisCod];
+    char paisDesc[largoContinente];
     int cantRegistros;
     float total_credito;
     float total_debito;
@@ -34,7 +37,7 @@ typedef struct
 
 typedef struct
 {
-    char continente [30];
+    char continente [largoContinente];
     int cantRegistros;
     float total_credito;
     float total_debito;
@@ -42,7 +45,7 @@ typedef struct
 
 typedef struct
 {
-    char paisDesc[50];
+    char paisDesc[largoPaisDesc];
     float t1;
     float t2;
     float t3;
@@ -67,5 +70,7 @@ void mostrarContinentesGuardados(Continente *, size_t *);
 
 SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, Transferencia*vecTransferencia, size_t *ceTransferencia);
 void mostrarSaldoTrimestral(SaldoTrimestral *, size_t *);
+
+void ordenarSaldoTrimestral(SaldoTrimestral *, size_t *);
 int archivoTxtSaldo (SaldoTrimestral *, size_t *);
 #endif // FUNCIONES_H_INCLUDED
