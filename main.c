@@ -1,4 +1,7 @@
-#include "funciones.h"
+ #include "funciones.h"
+ #include "mostrar.h"
+ #include "ordenar.h"
+ #include "archivos.h"
 
 int main()
 {
@@ -52,8 +55,6 @@ int main()
     ordenarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
     mostrarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
     archivoTxtSaldo(vecTrimestre, &cantidadTrimestre);
-
-
 
     free(vec);
     free(vecPaises);
