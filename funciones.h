@@ -32,13 +32,23 @@ typedef struct
     float total_debito;
 }Pais;
 
-typedef struct 
+typedef struct
 {
     char continente [30];
     int cantRegistros;
     float total_credito;
     float total_debito;
 }Continente;
+
+typedef struct
+{
+    char paisDesc[50];
+    float t1;
+    float t2;
+    float t3;
+    float t4;
+}SaldoTrimestral;
+
 
 Transferencia* cargarTransferencias(Transferencia *, size_t *, size_t *);
 void mostrarTransferencias(Transferencia *, size_t* );
@@ -51,6 +61,11 @@ void ordenarResumenPais(Pais *vec, size_t *cePais);
 void mostrarResumenPais(Pais *vec, size_t* cePais);
 
 Continente *ResumenContinentes(Continente *, size_t *, Pais *, size_t *, Paises_continente *, size_t *, size_t *);
+void ordenarContinente(Continente *, size_t *);
 void mostrarContinentesGuardados(Continente *, size_t *);
 
+
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, Transferencia*vecTransferencia, size_t *ceTransferencia);
+void mostrarSaldoTrimestral(SaldoTrimestral *, size_t *);
+int archivoTxtSaldo (SaldoTrimestral *, size_t *);
 #endif // FUNCIONES_H_INCLUDED

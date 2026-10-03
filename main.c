@@ -15,6 +15,8 @@ int main()
     Continente *vecContinentes;
     size_t capacidadContinentes = 10, cantidadContinentes=0;
 
+    SaldoTrimestral *vecTrimestre;
+    size_t capacidadTrimestre = 10, cantidadTrimestre =0;
 
     vec = (Transferencia *)malloc(capacidadTransferencias * sizeof(Transferencia));
 
@@ -24,26 +26,37 @@ int main()
 
     vecContinentes = (Continente *)malloc (capacidadContinentes * sizeof(Continente));
 
-    if(vec == NULL || vecPaises == NULL || vecResumenPais == NULL || vecContinentes== NULL)
+    vecTrimestre = (SaldoTrimestral *)malloc (capacidadTrimestre * sizeof(SaldoTrimestral));
+
+    if(vec == NULL || vecPaises == NULL || vecResumenPais == NULL || vecContinentes == NULL || vecTrimestre == NULL)
     {
         printf("Error al reservar memoria.\n");
         return SIN_MEM;
     }
-
+    // CARGA DE ARCHIVOS .CSV
     vec = cargarTransferencias(vec, &cantidadTransferencias, &capacidadTransferencias);
-
     vecPaises= cargarPaises(vecPaises, &cantidadPaises, &capacidadPaises);
 
+    //PUNTO 1
     vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadTransferencias, &capacidadResumenPais);
-    //ordenarResumenPais(vecResumenPais, &cantidadResumenPais);
-    //mostrarResumenPais(vecResumenPais, &cantidadResumenPais);
+    ordenarResumenPais(vecResumenPais, &cantidadResumenPais);
+    mostrarResumenPais(vecResumenPais, &cantidadResumenPais);
 
+    // PUNTO 2
+    printf("\n ----- Continentes ----- \n\n\n");
     vecContinentes = ResumenContinentes(vecContinentes, &cantidadContinentes, vecResumenPais, &cantidadResumenPais, vecPaises, &cantidadPaises, &capacidadContinentes);
+    ordenarContinente(vecContinentes, &cantidadContinentes);
     mostrarContinentesGuardados(vecContinentes, &cantidadContinentes);
 
+    vecTrimestre = calculoTrimestre(vecTrimestre, &cantidadTrimestre, &capacidadTrimestre, vec, &cantidadTransferencias);
+    mostrarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
+    archivoTxtSaldo(vecTrimestre, &cantidadTrimestre);
+
+
     free(vec);
-    free (vecPaises);
+    free(vecPaises);
     free(vecResumenPais);
     free(vecContinentes);
+    free(vecTrimestre);
     return 0;
 }

@@ -4,6 +4,7 @@ Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capa
 {
     char linea[256];
     char *token;
+    Transferencia *temp;
     FILE *arch = fopen("transferencias_personales_clean.csv", "r");
 
     if (arch == NULL)
@@ -18,7 +19,7 @@ Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capa
     {
         if (*ce == *capacidad) {
             *capacidad *= 2;
-            Transferencia *temp = (Transferencia *)realloc(vec, (*capacidad) * sizeof(Transferencia));
+            temp = (Transferencia *)realloc(vec, (*capacidad) * sizeof(Transferencia));
 
             if (temp == NULL) {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
@@ -32,6 +33,7 @@ Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capa
         if (token != NULL) {
             (vec + *ce)->anio = atoi(token);
         }
+
 
         // 2. TRIMESTRE
         token = strtok(NULL, ";");
@@ -349,6 +351,28 @@ Continente *ResumenContinentes(Continente *vecContinente, size_t *ceContinentes,
 
     return auxContinente;
 }
+void ordenarContinente(Continente *vecContinente, size_t *ceContinente)
+{
+    Continente *aux, reemplazo;
+    size_t i,j;
+
+    for(i=0;i< (*ceContinente)-1; i++)
+    {
+        aux = vecContinente;
+        for(j=0;j< (*ceContinente)-i-1; j++)
+        {
+            if(aux->total_credito < (aux+1)->total_credito)
+            {
+                reemplazo = *(aux+1);
+                *(aux+1) = *aux;
+                *aux = reemplazo;
+            }
+            aux++;
+        }
+    }
+
+}
+
 void mostrarContinentesGuardados(Continente *vecContinente, size_t *ceContinentes)
 {
     printf("\n--- LISTA DE CONTINENTES GUARDADOS (%zu) ---\n", *ceContinentes);
@@ -370,6 +394,175 @@ void mostrarContinentesGuardados(Continente *vecContinente, size_t *ceContinente
     printf("-------------------------------------------------------------------------\n");
 }
 
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, Transferencia*vecTransferencia, size_t *ceTransferencia)
+{
+    SaldoTrimestral *aux = vecTrimestre;
+    size_t i,j,k;
+    int creado=0, anio = 0;
+    float saldo=0;
+
+    printf ("\nIngrese anio para calcular saldos trimestrales:\n");
+    scanf ("%d", &anio);
+    getchar ();
+
+    for(i = 0 ; i < *ceTransferencia ; i++)
+    {
+
+        creado = 0;
+        vecTrimestre=aux;
+        saldo = 0;
+        for(j=0 ; j< *ceTrimestre ; j++)
+        {
+            if((strcmp(vecTrimestre->paisDesc,vecTransferencia->paisDesc) == 0) && vecTransferencia->anio == anio)
+            {
+                creado =1;
+                if(vecTransferencia->operacion == 'C' || vecTransferencia->operacion == 'c')
+                {
+                    saldo += vecTransferencia->monto;
+                }
+                if(vecTransferencia->operacion == 'D' || vecTransferencia->operacion == 'd')
+                {
+                    saldo -= vecTransferencia->monto;
+                }
+
+                switch(vecTransferencia->trimestre)
+                {
+                    case 1:
+                    vecTrimestre->t1 += saldo;
+                    break;
+
+                    case 2:
+                    vecTrimestre->t2 += saldo;
+                    break;
+
+                    case 3:
+                    vecTrimestre->t3 += saldo;
+                    break;
+
+                    case 4:
+                    vecTrimestre->t4 += saldo;
+                    break;
+                }
+
+
+            }
+            vecTrimestre++;
+        }
+        if(creado == 0 && vecTransferencia->anio == anio)
+        {
+            if(*ceTrimestre == *capacidadTrimestre)
+            {
+                *capacidadTrimestre *=2;
+                aux = (SaldoTrimestral *) realloc(aux, *capacidadTrimestre * sizeof(SaldoTrimestral));
+                if(aux == NULL)
+                {
+                    return vecTrimestre;
+                }
+
+                vecTrimestre = aux;
+
+                for(k=0 ; k < *ceTrimestre ; k++)
+                {
+                    vecTrimestre++;
+                }
+
+            }
+            strcpy(vecTrimestre->paisDesc, vecTransferencia->paisDesc);
+            vecTrimestre->t1 = 0;
+            vecTrimestre->t2 = 0;
+            vecTrimestre->t3 = 0;
+            vecTrimestre->t4 = 0;
+            *ceTrimestre +=1;
+
+            if(vecTransferencia->operacion == 'C' || vecTransferencia->operacion == 'c')
+                {
+                    saldo += vecTransferencia->monto;
+                }
+                if(vecTransferencia->operacion == 'D' || vecTransferencia->operacion == 'd')
+                {
+                    saldo -= vecTransferencia->monto;
+                }
+
+            switch(vecTransferencia->trimestre)
+                {
+                    case 1:
+                    vecTrimestre->t1 += saldo;
+                    break;
+
+                    case 2:
+                    vecTrimestre->t2 += saldo;
+                    break;
+
+                    case 3:
+                    vecTrimestre->t3 += saldo;
+                    break;
+
+                    case 4:
+                    vecTrimestre->t4 += saldo;
+                    break;
+                }
+
+        }
+
+
+        vecTransferencia++;
+    }
+
+    return aux;
+}
+
+void mostrarSaldoTrimestral(SaldoTrimestral *vec, size_t *ce)
+{
+    printf("\n--- SALDO TRIMESTRAL POR PAIS (%zu) ---\n", *ce);
+
+    // Encabezado de columnas
+    printf("%-25s | %-12s | %-12s | %-12s | %-12s\n", "PAIS", "TRIM 1", "TRIM 2", "TRIM 3", "TRIM 4");
+    printf("----------------------------------------------------------------------------------------\n");
+
+    for(size_t i = 0; i < *ce; i++)
+    {
+        printf("%-25s | %-12.2f | %-12.2f | %-12.2f | %-12.2f\n",
+               vec->paisDesc,
+               vec->t1,
+               vec->t2,
+               vec->t3,
+               vec->t4);
+
+        // Avanzamos el puntero al siguiente elemento
+        vec++;
+    }
+    printf("----------------------------------------------------------------------------------------\n");
+}
+
+int archivoTxtSaldo (SaldoTrimestral *vecTrimestre, size_t *cantidadTrimeste)
+{
+    size_t i;
+    FILE *arch = fopen("SaldoTrimestral.txt", "wt");
+
+    if(arch == NULL)
+    {
+        printf("\nError archivo txt.");
+        return SIN_MEM;
+    }
+
+    fprintf(arch, "--- SALDO TRIMESTRAL POR PAIS (%zu) ---\n", *cantidadTrimeste);
+    fprintf(arch,"----------------------------------------------------------------------------------------\n");
+    fprintf(arch,"%-25s | %-12s | %-12s | %-12s | %-12s\n", "PAIS", "TRIM 1", "TRIM 2", "TRIM 3", "TRIM 4");
+    fprintf(arch,"----------------------------------------------------------------------------------------\n");
+
+    for(i=0 ; i<*cantidadTrimeste; i++)
+    {
+        fprintf(arch,"%-25s | %-12.2f | %-12.2f | %-12.2f | %-12.2f\n",
+               vecTrimestre->paisDesc,
+               vecTrimestre->t1,
+               vecTrimestre->t2,
+               vecTrimestre->t3,
+               vecTrimestre->t4);
+
+       vecTrimestre++;        
+    }
+    fprintf(arch,"----------------------------------------------------------------------------------------");
+}
 
 
 
