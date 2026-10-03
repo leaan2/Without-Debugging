@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="archivos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="archivos.h" />
 		<Unit filename="funciones.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -42,6 +46,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mostrar.h" />
+		<Unit filename="ordenar.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ordenar.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
