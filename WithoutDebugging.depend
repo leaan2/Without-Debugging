@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1790889643 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
+1790966327 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
 	"funciones.h"
 
-1790889611 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
+1790966060 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1790889642 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
+1790966535 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
 	"funciones.h"
 
