@@ -20,6 +20,9 @@ int main()
     SaldoTrimestral *vecTrimestre;
     size_t capacidadTrimestre = 10, cantidadTrimestre =0;
 
+    AnualAnio *vecAnual;
+    size_t capacidadAnual = 10, cantidadAnual = 0;
+
     vec = (Transferencia *)malloc(capacidadTransferencias * sizeof(Transferencia));
 
     vecPaises = (Paises_continente *)malloc(capacidadPaises * sizeof(Paises_continente));
@@ -30,7 +33,8 @@ int main()
 
     vecTrimestre = (SaldoTrimestral *)malloc (capacidadTrimestre * sizeof(SaldoTrimestral));
 
-    if(vec == NULL || vecPaises == NULL || vecResumenPais == NULL || vecContinentes == NULL || vecTrimestre == NULL)
+    vecAnual = (AnualAnio *)malloc (capacidadAnual * sizeof(AnualAnio));
+    if(vec == NULL || vecPaises == NULL || vecResumenPais == NULL || vecContinentes == NULL || vecTrimestre == NULL || vecAnual == NULL)
     {
         printf("Error al reservar memoria.\n");
         return SIN_MEM;
@@ -40,7 +44,7 @@ int main()
     vecPaises= cargarPaises(vecPaises, &cantidadPaises, &capacidadPaises);
 
     //PUNTO 1
-    vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadTransferencias, &capacidadResumenPais);
+    vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
     ordenarResumenPais(vecResumenPais, &cantidadResumenPais);
     mostrarResumenPais(vecResumenPais, &cantidadResumenPais);
 
@@ -56,10 +60,19 @@ int main()
     mostrarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
     archivoTxtSaldo(vecTrimestre, &cantidadTrimestre);
 
+
+    // PUNTO 4 
+    vecAnual = totalAnual(vecAnual, &cantidadAnual, &capacidadAnual, vec, &cantidadTransferencias);
+    ordenarAnualAnio (vecAnual, &cantidadAnual);
+    vecAnual = calculoVariacionAnual(vecAnual, &cantidadAnual);
+    printf("\n\nANUAL POR ANIO");
+    mostrarAnualAnio(vecAnual, &cantidadAnual);
+
     free(vec);
     free(vecPaises);
     free(vecResumenPais);
     free(vecContinentes);
     free(vecTrimestre);
+    free(vecAnual);
     return 0;
 }

@@ -29,5 +29,7 @@ int archivoTxtSaldo (SaldoTrimestral *vecTrimestre, size_t *cantidadTrimeste)
     }
     fprintf(arch,"----------------------------------------------------------------------------------------");
 
+
+    fclose(arch);
     return 1;
 }

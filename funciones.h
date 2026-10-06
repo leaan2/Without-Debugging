@@ -51,10 +51,22 @@ typedef struct
     float t4;
 } SaldoTrimestral;
 
+typedef struct
+{
+    int anio;
+    float credito;
+    float debito;
+    float saldo;
+    float var_pct_saldo;
+}AnualAnio;
+
+
+
 Transferencia* cargarTransferencias(Transferencia *, size_t *, size_t *);
 Paises_continente* cargarPaises(Paises_continente *, size_t *, size_t *);
-Pais *lecturaAgrupamientoPais(Pais *vec,Transferencia *vecTransferencia ,size_t *ce, size_t *cePais,size_t *capacidad, size_t *capacidadPais);
+Pais *lecturaAgrupamientoPais(Pais *,Transferencia * ,size_t *, size_t *, size_t *);
 Continente *ResumenContinentes(Continente *, size_t *, Pais *, size_t *, Paises_continente *, size_t *, size_t *);
-SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, Transferencia*vecTransferencia, size_t *ceTransferencia);
-
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, Transferencia*, size_t *);
+AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, Transferencia *, size_t *);
+AnualAnio *calculoVariacionAnual (AnualAnio *, size_t *);
 #endif // FUNCIONES_H_INCLUDED

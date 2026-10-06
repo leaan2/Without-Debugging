@@ -1,12 +1,34 @@
 # depslib dependency file v1.0
-1791057839 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
+1791260741 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
 	"funciones.h"
 
-1791057839 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
+1791260766 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1791057676 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
+1791260615 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
 	"funciones.h"
+	"mostrar.h"
+	"ordenar.h"
+	"archivos.h"
+
+1791227825 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\archivos.c
+	"archivos.h"
+
+1791061869 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\archivos.h
+	"funciones.h"
+
+1791229467 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.h
+	"funciones.h"
+
+1791234678 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.h
+
+1791258835 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.c
+	"funciones.h"
+	"mostrar.h"
+
+1791234720 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.c
+	"funciones.h"
+	"ordenar.h"
 

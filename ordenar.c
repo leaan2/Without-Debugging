@@ -57,7 +57,7 @@ void ordenarSaldoTrimestral(SaldoTrimestral *vecTrimestre, size_t *ceTrimestre)
         for(j=0 ; j< *ceTrimestre-i-1 ; j++)
         {
             if(strcmp(aux->paisDesc, (aux+1)->paisDesc)>0)
-             {   
+             {
                 reemplazo = *(aux+1);
                 *(aux+1) = *aux;
                 *aux = reemplazo;
@@ -68,3 +68,30 @@ void ordenarSaldoTrimestral(SaldoTrimestral *vecTrimestre, size_t *ceTrimestre)
     }
 
 }
+void ordenarAnualAnio (AnualAnio *vecAnual, size_t *ceAnual)
+{
+   AnualAnio *aux, reemplazo;
+    size_t i,j;
+
+    for(i=0; i< *ceAnual -1; i++)
+    {
+        aux = vecAnual;
+        for(j=0 ; j< *ceAnual-i-1 ; j++)
+        {
+            if(aux->anio > (aux+1)->anio)
+             {
+                reemplazo = *(aux+1);
+                *(aux+1) = *aux;
+                *aux = reemplazo;
+             }
+             aux++;
+        }
+
+    }
+}
+
+
+
+
+
+
