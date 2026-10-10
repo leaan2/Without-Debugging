@@ -2,7 +2,7 @@
 #include "ordenar.h"
 
 
-void ordenarResumenPais(Pais *vec, size_t *cePais)
+void ordenarResumenPaisCredito(Pais *vec, size_t *cePais)
 {
     Pais *aux, reemplazo;
     size_t i,j;
@@ -23,6 +23,28 @@ void ordenarResumenPais(Pais *vec, size_t *cePais)
     }
 
 }
+void ordenarResumenPaisDebito(Pais *vec, size_t *cePais)
+{
+    Pais *aux, reemplazo;
+    size_t i,j;
+
+    for(i=0;i< (*cePais)-1; i++)
+    {
+        aux = vec;
+        for(j=0;j< (*cePais)-i-1; j++)
+        {
+            if(aux->total_debito < (aux+1)->total_debito)
+            {
+                reemplazo = *(aux+1);
+                *(aux+1) = *aux;
+                *aux = reemplazo;
+            }
+            aux++;
+        }
+    }
+}
+
+
 
 void ordenarContinente(Continente *vecContinente, size_t *ceContinente)
 {
@@ -90,7 +112,27 @@ void ordenarAnualAnio (AnualAnio *vecAnual, size_t *ceAnual)
     }
 }
 
+void ordenarParticipacion(participacionContinente *vecParticipacionContinente, size_t *ceParticipacion)
+{
+    participacionContinente *aux, reemplazo;
+    size_t i,j;
 
+    for(i=0;i< (*ceParticipacion)-1; i++)
+    {
+        aux = vecParticipacionContinente;
+        for(j=0;j< (*ceParticipacion)-i-1; j++)
+        {
+            if(strcmp(aux->continente, (aux+1)->continente) > 0)
+            {
+                reemplazo = *(aux+1);
+                *(aux+1) = *aux;
+                *aux = reemplazo;
+            }
+            aux++;
+        }
+    }
+
+}
 
 
 

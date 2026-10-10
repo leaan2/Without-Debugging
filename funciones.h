@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+
 #define SIN_MEM -1
 #define largoPaisCod 4
 #define largoPaisDesc 50
@@ -60,6 +62,12 @@ typedef struct
     float var_pct_saldo;
 }AnualAnio;
 
+typedef struct{
+    char continente [largoContinente];
+    float total_credito;
+    float total_debito;
+}participacionContinente;
+
 
 
 Transferencia* cargarTransferencias(Transferencia *, size_t *, size_t *);
@@ -69,4 +77,6 @@ Continente *ResumenContinentes(Continente *, size_t *, Pais *, size_t *, Paises_
 SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, Transferencia*, size_t *);
 AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, Transferencia *, size_t *);
 AnualAnio *calculoVariacionAnual (AnualAnio *, size_t *);
+participacionContinente* porcentajeContinente (participacionContinente *, size_t *, Continente* );
+
 #endif // FUNCIONES_H_INCLUDED

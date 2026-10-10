@@ -478,4 +478,45 @@ AnualAnio *calculoVariacionAnual (AnualAnio *vecAnual, size_t *ceAnual)
     return retorno;
 }
 
+participacionContinente* porcentajeContinente (participacionContinente *vecParticipacionContinente, size_t *ceParticipacion, Continente* vecContinente)
+{
+    participacionContinente* aux= vecParticipacionContinente;
+    float sumaCredito=0, sumaDebito=0;
+
+    for(size_t i =0 ; i < *ceParticipacion;i++)
+    {
+
+        strcpy(vecParticipacionContinente->continente, vecContinente->continente);
+
+        vecParticipacionContinente->total_credito=0;
+        vecParticipacionContinente->total_credito+= vecContinente->total_credito;
+
+        vecParticipacionContinente->total_debito=0;
+        vecParticipacionContinente->total_debito+= vecContinente->total_debito;
+
+        sumaCredito+= vecContinente->total_credito;
+        sumaDebito+= vecContinente->total_debito;
+
+        vecContinente++;
+        vecParticipacionContinente++;
+    }
+    vecParticipacionContinente= aux;
+
+
+
+    for(size_t i =*ceParticipacion; i > 0;i--)
+    {
+        vecParticipacionContinente->total_credito = (vecParticipacionContinente->total_credito / sumaCredito) * 100;
+        vecParticipacionContinente->total_debito = (vecParticipacionContinente->total_debito / sumaDebito) * 100;
+
+
+        vecParticipacionContinente++;
+    }
+
+
+
+    return aux;
+}
+
+
 
