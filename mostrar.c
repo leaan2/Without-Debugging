@@ -1,7 +1,7 @@
 #include "funciones.h"
 #include "mostrar.h"
 
-void mostrarTransferencias(Transferencia *vec, size_t* ce)
+void mostrarTransferencias(TransferenciaPersonal *vec, size_t* ce)
 {
     printf("\n--- Registros cargados: %zu ---\n", *ce);
 
@@ -148,5 +148,31 @@ void mostrarListadoPaises(Pais *vec, size_t* cePais, char* Operacion)
     }
 
 }
+void mostrarBaseLargaEnMemoria(TransferenciaBaseLarga *vecBase, size_t* ceBase)
+{
 
+
+    printf("\n--- VISTA PREVIA DEL VECTOR EN MEMORIA (Primeros  de %zu) ---\n", *ceBase);
+
+    // Encabezado alineado
+    printf("%-6s | %-4s | %-4s | %-20s | %-15s | %-2s | %-10s\n",
+           "ANIO", "TRIM", "COD", "PAIS", "CONTINENTE", "OP", "MONTO");
+    printf("-----------------------------------------------------------------------------\n");
+
+    for(size_t i = 0; i < *ceBase; i++)
+    {
+        // .20s recorta el string si es muy largo para que no rompa la tabla visualmente
+        printf("%-6d | %-4d | %-4s | %-20.20s | %-15.15s | %-2c | %-10.2f\n",
+               vecBase->anio,
+               vecBase->trimestre,
+               vecBase->paisCod,
+               vecBase->paisDesc,
+               vecBase->continente,
+               vecBase->operacion,
+               vecBase->monto);
+
+        vecBase++;
+    }
+    printf("-----------------------------------------------------------------------------\n");
+}
 

@@ -18,7 +18,7 @@ typedef struct
     char paisDesc[largoPaisDesc];
     char operacion;
     float monto;
-} Transferencia;
+} TransferenciaPersonal;
 
 typedef struct
 {
@@ -30,7 +30,7 @@ typedef struct
 typedef struct
 {
     char paisCod[largoPaisCod];
-    char paisDesc[largoContinente];
+    char paisDesc[largoPaisDesc];
     int cantRegistros;
     float total_credito;
     float total_debito;
@@ -68,15 +68,26 @@ typedef struct{
     float total_debito;
 }participacionContinente;
 
+typedef struct 
+{
+    int anio;
+    int trimestre;
+    char paisCod[largoPaisCod];
+    char paisDesc[largoPaisDesc];
+    char continente[largoContinente];
+    char operacion;
+    float monto;
+}TransferenciaBaseLarga;
 
 
-Transferencia* cargarTransferencias(Transferencia *, size_t *, size_t *);
+TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *, size_t *, size_t *);
 Paises_continente* cargarPaises(Paises_continente *, size_t *, size_t *);
-Pais *lecturaAgrupamientoPais(Pais *,Transferencia * ,size_t *, size_t *, size_t *);
+Pais *lecturaAgrupamientoPais(Pais *,TransferenciaPersonal * ,size_t *, size_t *, size_t *);
 Continente *ResumenContinentes(Continente *, size_t *, Pais *, size_t *, Paises_continente *, size_t *, size_t *);
-SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, Transferencia*, size_t *);
-AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, Transferencia *, size_t *);
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, TransferenciaPersonal*, size_t *);
+AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, TransferenciaPersonal *, size_t *);
 AnualAnio *calculoVariacionAnual (AnualAnio *, size_t *);
 participacionContinente* porcentajeContinente (participacionContinente *, size_t *, Continente* );
+int vecBaseLarga (TransferenciaPersonal *, size_t *, Paises_continente *, size_t *);
 
 #endif // FUNCIONES_H_INCLUDED

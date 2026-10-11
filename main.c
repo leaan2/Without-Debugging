@@ -5,7 +5,7 @@
 
 int main()
 {
-    Transferencia *vec;
+    TransferenciaPersonal *vec;
     size_t capacidadTransferencias = 10, cantidadTransferencias=0;
 
     Paises_continente *vecPaises;
@@ -30,7 +30,9 @@ int main()
     size_t cantidadParticipacion =0, capacidadParticipacion=10;
     int leerArchivo =0;
 
-    vec = (Transferencia *)malloc(capacidadTransferencias * sizeof(Transferencia));
+    
+
+    vec = (TransferenciaPersonal *)malloc(capacidadTransferencias * sizeof(TransferenciaPersonal));
 
     vecPaises = (Paises_continente *)malloc(capacidadPaises * sizeof(Paises_continente));
 
@@ -41,6 +43,8 @@ int main()
     vecTrimestre = (SaldoTrimestral *)malloc (capacidadTrimestre * sizeof(SaldoTrimestral));
 
     vecAnual = (AnualAnio *)malloc (capacidadAnual * sizeof(AnualAnio));
+
+  
     if(!vec  || !vecPaises || !vecResumenPais  || !vecContinentes || !vecTrimestre  || !vecAnual)
     {
         printf("Error al reservar memoria.\n");
@@ -135,12 +139,25 @@ int main()
     {
         mostrarParticipacionContinente();
     }
+
+
+    // punto 7
+    vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
     
+    
+    
+
+
+
+
+
+
     free(vec);
     free(vecPaises);
     free(vecResumenPais);
     free(vecContinentes);
     free(vecTrimestre);
     free(vecAnual);
+    
     return 0;
 }

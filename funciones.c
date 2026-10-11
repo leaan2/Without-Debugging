@@ -1,11 +1,11 @@
 #include "funciones.h"
 #define largoLinea 256
 
-Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capacidad)
+TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *vec, size_t *ce, size_t *capacidad)
 {
     char linea[largoLinea];
     char *token;
-    Transferencia *temp = vec;
+    TransferenciaPersonal *temp = vec;
     FILE *arch = fopen("transferencias_personales_clean.csv", "r");
 
     if (arch == NULL)
@@ -21,7 +21,7 @@ Transferencia* cargarTransferencias(Transferencia *vec, size_t *ce, size_t *capa
         if (*ce == *capacidad)
         {
             *capacidad *= 2;
-            temp = (Transferencia *)realloc(temp, (*capacidad) * sizeof(Transferencia));
+            temp = (TransferenciaPersonal *)realloc(temp, (*capacidad) * sizeof(TransferenciaPersonal));
 
             if (temp == NULL) {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
@@ -138,7 +138,7 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
     return temp;
 }
 
-Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,Transferencia *vecTransferencia ,size_t *ceTransferencias, size_t *cePais, size_t *capacidadPais)
+Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTransferencia ,size_t *ceTransferencias, size_t *cePais, size_t *capacidadPais)
 {
     int i, j,encontrado=0, k;
     Pais *aux = vecResumenPais; // para poder volver al principio del puntero
@@ -275,7 +275,7 @@ Continente *ResumenContinentes(Continente *vecRefContinente, size_t *ceContinent
     return auxContinente;
 }
 
-SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, Transferencia*vecTransferencia, size_t *ceTransferencia)
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, TransferenciaPersonal*vecTransferencia, size_t *ceTransferencia)
 {
     SaldoTrimestral *aux = vecTrimestre;
     size_t i,j;
@@ -389,7 +389,7 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
 
     return aux;
 }
-AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAnual, Transferencia *vecTransferencia, size_t *ceTransferencia)
+AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAnual, TransferenciaPersonal *vecTransferencia, size_t *ceTransferencia)
 {
     size_t i,j;
     int creado=0;
@@ -518,5 +518,99 @@ participacionContinente* porcentajeContinente (participacionContinente *vecParti
     return aux;
 }
 
+int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises_continente *vecPaises, size_t *cePaises)
+{
+    int creado =0;
+    size_t ceTransBaseLarga=0, capacidadTransBaseLarga=10;
+    size_t i,j,k;
+    TransferenciaBaseLarga* vecTransBaseLarga =(TransferenciaBaseLarga *)malloc(capacidadTransBaseLarga * sizeof(TransferenciaBaseLarga));
+    if(!vecTransBaseLarga)
+    {
+        printf("\nError al reservar memoria para transferencia base larga");
+        return SIN_MEM;
+    }
+    TransferenciaBaseLarga* auxBaseLarga = vecTransBaseLarga;
+    Paises_continente* auxPaises = vecPaises;
+    FILE *arch = fopen("transferencias_base_larga.csv", "wt");
+    if(!arch)
+    {
+        printf("\nError al abrir archivo");
+        free(vecTransBaseLarga);
+        return SIN_MEM;
+    }
 
+    for(i=0; i < *cePersonal ; i++)
+    {
+        vecPaises= auxPaises;
+        for(j=0; j< *cePaises; j++)
+        {
+            vecTransBaseLarga= auxBaseLarga;
+            if(strcmp(vecPersonal->paisCod, vecPaises->paisCod)==0)
+            {
+
+                for(k=0; k < ceTransBaseLarga; k++)
+                {
+                    if(strcmp(vecTransBaseLarga->paisCod, vecPaises->paisCod)==0 && vecTransBaseLarga->anio == vecPersonal->anio && vecTransBaseLarga->trimestre == vecPersonal->trimestre && vecTransBaseLarga->operacion == vecPersonal->operacion)
+                    {
+                        creado =1;
+                        vecTransBaseLarga->monto += vecPersonal->monto;
+                    }
+
+                    vecTransBaseLarga++;
+                }
+                if(creado==0)
+                {
+                    if(capacidadTransBaseLarga == ceTransBaseLarga)
+                    {
+                        capacidadTransBaseLarga *=2;
+                        auxBaseLarga = (TransferenciaBaseLarga *) realloc(auxBaseLarga, capacidadTransBaseLarga * sizeof(TransferenciaBaseLarga));
+                        if(!auxBaseLarga)
+                        {
+                            printf("\nError al reservar memoria nuevamente para transferencia base larga");
+                            return SIN_MEM;
+                        }
+                        vecTransBaseLarga = auxBaseLarga + ceTransBaseLarga;
+                    }
+
+                    vecTransBaseLarga->anio = vecPersonal->anio;
+                    vecTransBaseLarga->trimestre = vecPersonal->trimestre;
+                    strcpy(vecTransBaseLarga->paisCod, vecPersonal->paisCod);
+                    strcpy(vecTransBaseLarga->paisDesc, vecPersonal->paisDesc);
+                    strcpy(vecTransBaseLarga->continente, vecPaises->continente);
+                    vecTransBaseLarga->operacion = vecPersonal->operacion;
+
+                    vecTransBaseLarga->monto = 0;
+                    vecTransBaseLarga->monto += vecPersonal->monto;
+
+                    ceTransBaseLarga++;
+                }
+                creado =0;
+            }
+            vecPaises++;
+        }
+        vecPersonal++;
+    }
+
+    vecTransBaseLarga = auxBaseLarga;
+    fprintf(arch, "ANIO;TRIMESTRE;PAIS_COD;PAIS_DESC;CONTINENTE;OPERACION;MONTO\n");
+    for(i=0 ; i< ceTransBaseLarga; i++)
+    {
+         fprintf(arch, "%d;%d;%s;%s;%s;%c;%.2f\n",
+                vecTransBaseLarga->anio,
+                vecTransBaseLarga->trimestre,
+                vecTransBaseLarga->paisCod,
+                vecTransBaseLarga->paisDesc,
+                vecTransBaseLarga->continente,
+                vecTransBaseLarga->operacion,
+                vecTransBaseLarga->monto);
+
+        vecTransBaseLarga++;
+    }
+
+
+    vecTransBaseLarga = auxBaseLarga;
+    free(vecTransBaseLarga);
+    fclose(arch);
+    return 1;
+}
 
