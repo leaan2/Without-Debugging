@@ -468,7 +468,7 @@ AnualAnio *calculoVariacionAnual (AnualAnio *vecAnual, size_t *ceAnual)
 
     for(i=0;i< *ceAnual; i++)
     {
-        if(i > 0)  // para evitar el primer anio
+        if(i > 0 && (vecAnual-1)->saldo > 0)  // para evitar el primer anio
         {
             vecAnual->var_pct_saldo = ((vecAnual->saldo - (vecAnual-1)->saldo)/ (vecAnual-1)->saldo) *100;
         }
@@ -506,9 +506,15 @@ participacionContinente* porcentajeContinente (participacionContinente *vecParti
 
     for(size_t i =*ceParticipacion; i > 0;i--)
     {
-        vecParticipacionContinente->total_credito = (vecParticipacionContinente->total_credito / sumaCredito) * 100;
-        vecParticipacionContinente->total_debito = (vecParticipacionContinente->total_debito / sumaDebito) * 100;
+        if (sumaCredito > 0)
+        {
+            vecParticipacionContinente->total_credito = (vecParticipacionContinente->total_credito / sumaCredito) * 100;
+        }
 
+        if (sumaDebito > 0)
+        {
+            vecParticipacionContinente->total_debito = (vecParticipacionContinente->total_debito / sumaDebito) * 100;
+        }
 
         vecParticipacionContinente++;
     }

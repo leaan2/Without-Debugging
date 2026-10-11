@@ -118,12 +118,12 @@ void mostrarListadoPaises(Pais *vec, size_t* cePais, char* Operacion)
 
     if(*Operacion == 'C')
     {
-        printf("%-5s | %-25s | %-10s | %-15s\n", "COD", "NOMBRE DEL PAIS", "REGISTROS", "CREDITO");
+        printf("%-10s | %-5s | %-25s | %-10s | %-15s\n", "RANKING", "COD", "NOMBRE DEL PAIS", "REGISTROS", "CREDITO");
         printf("--------------------------------------------------------------------------------------\n");
         for(size_t i = 0; i < *cePais; i++)
         {
 
-            printf("%-5s | %-25s | %-10d | %-15.2f\n", vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_credito);
+            printf("%-10zu | %-5s | %-25s | %-10d | %-15.2f\n", i + 1, vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_credito);
 
 
             vec++;
@@ -133,12 +133,12 @@ void mostrarListadoPaises(Pais *vec, size_t* cePais, char* Operacion)
     }
     else
     {
-        printf("%-5s | %-25s | %-10s | %-15s\n", "COD", "NOMBRE DEL PAIS", "REGISTROS", "DEBITO");
+        printf("%-10s | %-5s | %-25s | %-10s | %-15s\n", "RANKING", "COD", "NOMBRE DEL PAIS", "REGISTROS", "DEBITO");
         printf("--------------------------------------------------------------------------------------\n");
         for(size_t i = 0; i < *cePais; i++)
         {
 
-            printf("%-5s | %-25s | %-10d | %-15.2f\n", vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_debito);
+            printf("%-10zu | %-5s | %-25s | %-10d | %-15.2f\n", i + 1, vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_debito);
 
 
             vec++;
