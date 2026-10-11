@@ -125,7 +125,7 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
         }
 
         // 3. continente
-        token = strtok(NULL, ";");
+        token = strtok(NULL, ";\r\n");
         if (token != NULL)
         {
             strcpy(vec->continente, token);
@@ -567,6 +567,8 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
                         if(!auxBaseLarga)
                         {
                             printf("\nError al reservar memoria nuevamente para transferencia base larga");
+                            fclose(arch);
+                            free(vecTransBaseLarga);
                             return SIN_MEM;
                         }
                         vecTransBaseLarga = auxBaseLarga + ceTransBaseLarga;
