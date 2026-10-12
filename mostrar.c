@@ -176,3 +176,23 @@ void mostrarBaseLargaEnMemoria(TransferenciaBaseLarga *vecBase, size_t* ceBase)
     printf("-----------------------------------------------------------------------------\n");
 }
 
+void mostrarPromedioTrimestral(PromedioTrimestral *vecPromedio, size_t *cePromedio)
+{
+    printf("\n--- PROMEDIO TRIMESTRAL POR PAIS (%zu) ---\n", *cePromedio);
+
+    printf("%-5s | %-25s | %-10s | %-15s\n", "COD", "NOMBRE DEL PAIS", "CANT TRIM", "PROMEDIO");
+    printf("---------------------------------------------------------------\n");
+
+    for(size_t i = 0; i < *cePromedio; i++)
+    {
+        printf("%-5s | %-25s | %-10d | %-15.2f\n",
+               vecPromedio->paisCod,
+               vecPromedio->paisDesc,
+               vecPromedio->cant_trimestres,
+               vecPromedio->promedio);
+
+        vecPromedio++;
+    }
+    printf("---------------------------------------------------------------\n");
+}
+

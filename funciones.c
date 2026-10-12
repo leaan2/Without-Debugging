@@ -540,7 +540,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
     FILE *arch = fopen("transferencias_base_larga.csv", "wt");
     if(!arch)
     {
-        printf("\nError al abrir archivo");
+        printf("\nError al abrir archivo del punto 7");
         free(vecTransBaseLarga);
         return SIN_MEM;
     }
@@ -622,3 +622,138 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
     return 1;
 }
 
+//aca arranca el codigo de verdad papá
+PromedioTrimestral* calculoPromedio(PromedioTrimestral *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
+    TransferenciaBaseLarga *vecBaseLarga;
+    size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
+    FILE *arch = fopen("transferencias_base_larga.csv", "r");
+    char linea[largoLinea];
+    char *token;
+    PromedioTrimestral *tempPromedio = vecPromedio;
+    int creado = 0;
+
+    vecBaseLarga = (TransferenciaBaseLarga*)malloc(capacidadBaseLarga * sizeof(TransferenciaBaseLarga));
+    TransferenciaBaseLarga *tempBaseLarga = vecBaseLarga;
+
+    if(!vecBaseLarga){
+        return NULL;
+    }
+
+    if (arch == NULL)
+    {
+        free(vecBaseLarga);
+        return NULL;
+    }
+
+    fgets(linea, sizeof(linea), arch);
+
+    while (fgets(linea, sizeof(linea), arch) != NULL)
+    {
+        if (ceBaseLarga == capacidadBaseLarga)
+        {
+            capacidadBaseLarga *= 2;
+            tempBaseLarga = (TransferenciaBaseLarga *)realloc(tempBaseLarga, capacidadBaseLarga * sizeof(TransferenciaBaseLarga));
+
+            if (tempBaseLarga == NULL) {
+                printf("\nError: memoria insuficiente al redimensionar.\n");
+                return NULL;
+            }
+            vecBaseLarga = tempBaseLarga + ceBaseLarga;
+        }
+
+        // 1. ANIO
+        token = strtok(linea, ";");
+        if (token != NULL)
+        {
+            vecBaseLarga->anio = atoi(token);
+        }
+
+        // 2. TRIMESTRE
+        token = strtok(NULL, ";");
+        if (token != NULL)
+        {
+           vecBaseLarga->trimestre = atoi(token);
+        }
+
+        // 3. PAIS_COD
+        token = strtok(NULL, ";");
+        if (token != NULL)
+        {
+            strcpy(vecBaseLarga->paisCod, token);
+        }
+
+        // 4. PAIS_DESC
+        token = strtok(NULL, ";");
+        if (token != NULL)
+        {
+            strcpy(vecBaseLarga->paisDesc, token);
+        }
+
+        // 5. CONTINENTE
+        token = strtok(NULL, ";");
+        if (token != NULL)
+        {
+            strcpy(vecBaseLarga->continente, token);
+        }
+
+        // 6. OPERACION
+        token = strtok(NULL, ";");
+        if (token != NULL)
+        {
+            vecBaseLarga->operacion = *token;
+        }
+
+        // 7. MONTO
+        token = strtok(NULL, "\r\n");
+        if (token != NULL)
+        {
+            vecBaseLarga->monto = atof(token);
+        }
+
+        vecBaseLarga++;
+        ceBaseLarga++;
+
+    }
+
+    for(i = 0; i < ceBaseLarga; i++){
+        //1er elemento:
+        creado = 0;
+        for(j = 0; j < *cePromedio; j++){
+            if(strcmp(vecPromedio->paisCod, vecBaseLarga->paisCod) == 0 && vecPromedio->operacion == vecBaseLarga->operacion){
+                vecPromedio->suma_monto += vecBaseLarga->monto;
+                vecPromedio->cant_trimestres++;
+                creado = 1;
+                break;
+            }
+            vecPromedio++;
+        }
+        if(!creado){
+
+            if(*cePromedio == *capacidadPromedio){
+                *capacidadPromedio *= 2;
+                tempPromedio = (PromedioTrimestral *)realloc(tempPromedio, *capacidadPromedio * sizeof(PromedioTrimestral));
+
+                if (tempPromedio == NULL) {
+                    printf("\nError: memoria insuficiente al redimensionar.\n");
+                    return NULL;
+                }
+                vecBaseLarga = tempBaseLarga + ceBaseLarga;
+            }
+            // Crear nuevo promedio
+            strcpy(vecPromedio->paisCod, vecBaseLarga->paisCod);
+            strcpy(vecPromedio->paisDesc, vecBaseLarga->paisDesc);
+            vecPromedio->operacion = vecBaseLarga->operacion;
+            vecPromedio->suma_monto = vecBaseLarga->monto;
+            vecPromedio->cant_trimestres = 1;
+            (*cePromedio)++;
+
+
+        }
+
+        vecBaseLarga++;
+    }
+
+    fclose(arch);
+    free(vecBaseLarga);
+    return tempPromedio;
+}

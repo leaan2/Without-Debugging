@@ -30,7 +30,10 @@ int main()
     size_t cantidadParticipacion =0, capacidadParticipacion=10;
     int leerArchivo =0;
 
-    
+    PromedioTrimestral *vecPromedio;
+    size_t capacidadPromedio = 10, cantidadPromedio = 0;
+
+
 
     vec = (TransferenciaPersonal *)malloc(capacidadTransferencias * sizeof(TransferenciaPersonal));
 
@@ -44,8 +47,10 @@ int main()
 
     vecAnual = (AnualAnio *)malloc (capacidadAnual * sizeof(AnualAnio));
 
+    vecPromedio = (PromedioTrimestral *)malloc(capacidadPromedio * sizeof(PromedioTrimestral));
+
   
-    if(!vec  || !vecPaises || !vecResumenPais  || !vecContinentes || !vecTrimestre  || !vecAnual)
+    if(!vec  || !vecPaises || !vecResumenPais  || !vecContinentes || !vecTrimestre  || !vecAnual || !vecPromedio)
     {
         printf("Error al reservar memoria.\n");
         return SIN_MEM;
@@ -144,7 +149,10 @@ int main()
     // punto 7
     vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
     
-    
+    //punto 8
+    vecPromedio = calculoPromedio(vecPromedio, &cantidadPromedio, &capacidadPromedio);
+    mostrarPromedioTrimestral(vecPromedio, &cantidadPromedio);
+
     
 
 
@@ -158,6 +166,6 @@ int main()
     free(vecContinentes);
     free(vecTrimestre);
     free(vecAnual);
-    
+    free(vecPromedio);
     return 0;
 }
