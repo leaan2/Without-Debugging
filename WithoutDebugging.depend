@@ -40,32 +40,32 @@
 1791837607 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\archivos.h
 	"funciones.h"
 
-1791841797 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.h
+1791849976 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1791846157 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.c
+1791849961 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.c
 	"funciones.h"
 
-1791844903 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\main.c
+1791853529 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\main.c
 	"funciones.h"
 	"mostrar.h"
 	"ordenar.h"
 	"archivos.h"
 
-1791844927 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.h
+1791847966 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.h
 	"funciones.h"
 
-1791837607 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.h
+1791849985 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.h
 	"funciones.h"
 
-1791844948 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.c
+1791854659 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.c
 	"funciones.h"
 	"mostrar.h"
 
-1791837607 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.c
+1791854500 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.c
 	"funciones.h"
 	"ordenar.h"
 

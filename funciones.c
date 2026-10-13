@@ -623,7 +623,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
 }
 
 //aca arranca el codigo de verdad papá
-PromedioTrimestral* calculoPromedio(PromedioTrimestral *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
+PromedioTrimestral* cargaPromedio(PromedioTrimestral *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
     TransferenciaBaseLarga *vecBaseLarga;
     size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
     FILE *arch = fopen("transferencias_base_larga.csv", "r");
@@ -715,9 +715,16 @@ PromedioTrimestral* calculoPromedio(PromedioTrimestral *vecPromedio, size_t *ceP
 
     }
 
+    vecBaseLarga = tempBaseLarga;
+
     for(i = 0; i < ceBaseLarga; i++){
         //1er elemento:
+        vecPromedio = tempPromedio;
         creado = 0;
+        if(vecBaseLarga->monto <= 0){
+            vecBaseLarga++;
+            continue;
+        }
         for(j = 0; j < *cePromedio; j++){
             if(strcmp(vecPromedio->paisCod, vecBaseLarga->paisCod) == 0 && vecPromedio->operacion == vecBaseLarga->operacion){
                 vecPromedio->suma_monto += vecBaseLarga->monto;
@@ -737,7 +744,7 @@ PromedioTrimestral* calculoPromedio(PromedioTrimestral *vecPromedio, size_t *ceP
                     printf("\nError: memoria insuficiente al redimensionar.\n");
                     return NULL;
                 }
-                vecBaseLarga = tempBaseLarga + ceBaseLarga;
+                vecPromedio = tempPromedio + *cePromedio;
             }
             // Crear nuevo promedio
             strcpy(vecPromedio->paisCod, vecBaseLarga->paisCod);
@@ -754,6 +761,23 @@ PromedioTrimestral* calculoPromedio(PromedioTrimestral *vecPromedio, size_t *ceP
     }
 
     fclose(arch);
-    free(vecBaseLarga);
+    free(tempBaseLarga);
     return tempPromedio;
 }
+
+PromedioTrimestral* calculoPromedio(PromedioTrimestral *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
+    PromedioTrimestral *tempPromedio = vecPromedio;
+
+    for(size_t i = 0; i < *cePromedio; i++) {
+        if(vecPromedio->cant_trimestres > 0) {
+            vecPromedio->promedio = vecPromedio->suma_monto / vecPromedio->cant_trimestres;
+        } else {
+            vecPromedio->promedio = 0.0;
+        }
+        vecPromedio++;
+    }
+
+    return tempPromedio;
+}
+
+

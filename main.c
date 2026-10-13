@@ -150,7 +150,9 @@ int main()
     vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
     
     //punto 8
+    vecPromedio = cargaPromedio(vecPromedio, &cantidadPromedio, &capacidadPromedio);
     vecPromedio = calculoPromedio(vecPromedio, &cantidadPromedio, &capacidadPromedio);
+    ordenarPromedioTrimestral(vecPromedio, &cantidadPromedio);
     mostrarPromedioTrimestral(vecPromedio, &cantidadPromedio);
 
     

@@ -99,6 +99,6 @@ AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, TransferenciaPersonal *,
 AnualAnio *calculoVariacionAnual (AnualAnio *, size_t *);
 participacionContinente* porcentajeContinente (participacionContinente *, size_t *, Continente* );
 int vecBaseLarga (TransferenciaPersonal *, size_t *, Paises_continente *, size_t *);
+PromedioTrimestral* cargaPromedio(PromedioTrimestral *, size_t *, size_t *);
 PromedioTrimestral* calculoPromedio(PromedioTrimestral *, size_t *, size_t *);
-
 #endif // FUNCIONES_H_INCLUDED
