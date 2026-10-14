@@ -87,7 +87,18 @@ typedef struct
     float suma_monto;
     int cant_trimestres;
     float promedio;
-}PromedioTrimestral;
+}PromedioTrimestralPais;
+
+typedef struct 
+{
+    int anio;
+    char continente[largoContinente];
+    char operacion;
+    float suma_monto;
+    int cant_trimestres;
+    float promedio;
+}PromedioTrimestralContinente;
+
 
 
 TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *, size_t *, size_t *);
@@ -98,7 +109,13 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, Transf
 AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, TransferenciaPersonal *, size_t *);
 AnualAnio *calculoVariacionAnual (AnualAnio *, size_t *);
 participacionContinente* porcentajeContinente (participacionContinente *, size_t *, Continente* );
+
 int vecBaseLarga (TransferenciaPersonal *, size_t *, Paises_continente *, size_t *);
-PromedioTrimestral* cargaPromedio(PromedioTrimestral *, size_t *, size_t *);
-PromedioTrimestral* calculoPromedio(PromedioTrimestral *, size_t *, size_t *);
+
+//punto 8
+PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *, size_t *, size_t *);
+PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *, size_t *, size_t *);
+
+PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinente*, size_t *, size_t *);
+PromedioTrimestralContinente* calculoPromedioContinente(PromedioTrimestralContinente* , size_t *);
 #endif // FUNCIONES_H_INCLUDED

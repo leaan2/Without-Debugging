@@ -30,8 +30,12 @@ int main()
     size_t cantidadParticipacion =0, capacidadParticipacion=10;
     int leerArchivo =0;
 
-    PromedioTrimestral *vecPromedio;
-    size_t capacidadPromedio = 10, cantidadPromedio = 0;
+    PromedioTrimestralPais *vecPromedioPais;
+    size_t capacidadPromedioPais = 10, cantidadPromedioPais = 0;
+
+
+    PromedioTrimestralContinente *vecContinentePromedioTrimestral;
+    size_t capacidadContinentePromedio = 10, cantidadContinentePromedio =0;
 
 
 
@@ -47,10 +51,11 @@ int main()
 
     vecAnual = (AnualAnio *)malloc (capacidadAnual * sizeof(AnualAnio));
 
-    vecPromedio = (PromedioTrimestral *)malloc(capacidadPromedio * sizeof(PromedioTrimestral));
+    vecPromedioPais = (PromedioTrimestralPais *)malloc(capacidadPromedioPais * sizeof(PromedioTrimestralPais));
 
-  
-    if(!vec  || !vecPaises || !vecResumenPais  || !vecContinentes || !vecTrimestre  || !vecAnual || !vecPromedio)
+    vecContinentePromedioTrimestral = (PromedioTrimestralContinente *)malloc (capacidadContinentePromedio * sizeof(PromedioTrimestralContinente));
+
+    if(!vec  || !vecPaises || !vecResumenPais  || !vecContinentes || !vecTrimestre  || !vecAnual || !vecPromedioPais || !vecContinentePromedioTrimestral)
     {
         printf("Error al reservar memoria.\n");
         return SIN_MEM;
@@ -148,16 +153,18 @@ int main()
 
     // punto 7
     vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
-    
+
     //punto 8
-    vecPromedio = cargaPromedio(vecPromedio, &cantidadPromedio, &capacidadPromedio);
-    vecPromedio = calculoPromedio(vecPromedio, &cantidadPromedio, &capacidadPromedio);
-    ordenarPromedioTrimestral(vecPromedio, &cantidadPromedio);
-    mostrarPromedioTrimestral(vecPromedio, &cantidadPromedio);
-
-    
+    vecPromedioPais = cargaPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais);
+    vecPromedioPais = calculoPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais);
+    ordenarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
+    mostrarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
 
 
+    // punto 9
+    vecContinentePromedioTrimestral = cargaPromedioContinente(vecContinentePromedioTrimestral, &cantidadContinentePromedio, &capacidadContinentePromedio);
+    vecContinentePromedioTrimestral = calculoPromedioContinente(vecContinentePromedioTrimestral , &cantidadContinentePromedio);
+    mostrarPromedioContinente(vecContinentePromedioTrimestral,  &cantidadContinentePromedio);
 
 
 
@@ -168,6 +175,7 @@ int main()
     free(vecContinentes);
     free(vecTrimestre);
     free(vecAnual);
-    free(vecPromedio);
+    free(vecPromedioPais);
+    free(vecContinentePromedioTrimestral);
     return 0;
 }

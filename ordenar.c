@@ -134,19 +134,19 @@ void ordenarParticipacion(participacionContinente *vecParticipacionContinente, s
 
 }
 
-void ordenarPromedioTrimestral(PromedioTrimestral *vecPromedio, size_t *cePromedio)
+void ordenarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePromedio)
 {
-    PromedioTrimestral *mayor;
-    PromedioTrimestral *fin = vecPromedio + *cePromedio;
-    PromedioTrimestral aux, *p, *q;
-    size_t i,j;
+    PromedioTrimestralPais *mayor;
+    PromedioTrimestralPais *fin = vecPromedio + *cePromedio;
+    PromedioTrimestralPais aux, *p, *q;
+
 
     for (p = vecPromedio; p < fin; p++)
     {
         if (p->operacion != 'C') {
             continue;
         }
-        
+
         mayor = p;
 
         for (q = p + 1; q < fin; q++)
