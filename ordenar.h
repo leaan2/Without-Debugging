@@ -8,5 +8,6 @@ void ordenarContinente(Continente *, size_t *);
 void ordenarSaldoTrimestral(SaldoTrimestral *, size_t *);
 void ordenarAnualAnio (AnualAnio *, size_t *);
 void ordenarParticipacion(participacionContinente *, size_t *);
+void ordenarPromedioTrimestral(PromedioTrimestralPais *, size_t *);
 
 #endif // ORDENAR_H_INCLUDED

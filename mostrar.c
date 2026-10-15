@@ -176,3 +176,45 @@ void mostrarBaseLargaEnMemoria(TransferenciaBaseLarga *vecBase, size_t* ceBase)
     printf("-----------------------------------------------------------------------------\n");
 }
 
+void mostrarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePromedio)
+{
+    printf("\n--- PROMEDIO TRIMESTRAL POR PAIS (%zu) ---\n", *cePromedio);
+
+    printf(" %-25s | %-15s | %-10s | %-15s\n", "NOMBRE DEL PAIS", "OPERACIÓN", "CANT TRIM", "PROMEDIO");
+    printf("---------------------------------------------------------------\n");
+
+    for(size_t i = 0; i < *cePromedio; i++)
+    {
+        printf("%-25s | %-15c | %-10d | %-15.2f\n",
+               vecPromedio->paisDesc,
+               vecPromedio->operacion,
+               vecPromedio->cant_trimestres,
+               vecPromedio->promedio);
+
+        vecPromedio++;
+    }
+    printf("---------------------------------------------------------------\n");
+}
+void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
+{
+    printf("\n--- VISTA PREVIA PUNTO 9: PROMEDIOS POR CONTINENTE Y ANIO (%zu registros) ---\n", *ce);
+    
+    // Encabezado alineado
+    printf("%-6s | %-15s | %-4s | %-12s | %-9s | %-12s\n", 
+           "ANIO", "CONTINENTE", "OP", "SUMA MONTO", "CANT TRIM", "PROMEDIO");
+    printf("----------------------------------------------------------------------------\n");
+
+    for(size_t i = 0; i < *ce; i++)
+    {
+        printf("%-6d | %-15s | %-4c | %-12.2f | %-9d | %-12.2f\n",
+               vec->anio,
+               vec->continente,
+               vec->operacion,
+               vec->suma_monto,
+               vec->cant_trimestres,
+               vec->promedio);
+        
+        vec++;
+    }
+    printf("----------------------------------------------------------------------------\n");
+}
