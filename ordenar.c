@@ -136,37 +136,23 @@ void ordenarParticipacion(participacionContinente *vecParticipacionContinente, s
 
 void ordenarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePromedio)
 {
-    PromedioTrimestralPais *mayor;
-    PromedioTrimestralPais *fin = vecPromedio + *cePromedio;
-    PromedioTrimestralPais aux, *p, *q;
+    PromedioTrimestralPais *aux, reemplazo;
+    size_t i,j;
 
-
-    for (p = vecPromedio; p < fin; p++)
+    for(i=0; i< *cePromedio -1; i++)
     {
-        if (p->operacion != 'C') {
-            continue;
-        }
-
-        mayor = p;
-
-        for (q = p + 1; q < fin; q++)
+        aux = vecPromedio;
+        for(j=0 ; j< *cePromedio-i-1 ; j++)
         {
-            if (q->operacion == 'C' && q->promedio > mayor->promedio)
-            {
-                mayor = q;
-            }
+            if(strcmp(aux->paisDesc, (aux+1)->paisDesc)>0)
+             {
+                reemplazo = *(aux+1);
+                *(aux+1) = *aux;
+                *aux = reemplazo;
+             }
+             aux++;
         }
-
-        if (mayor != p)
-    {
-        aux = *p;
-        *p = *mayor;
-        *mayor = aux;
     }
-
-
-    }
-
 }
 
 
