@@ -218,3 +218,24 @@ void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
     }
     printf("----------------------------------------------------------------------------\n");
 }
+
+int mostrarMenu(){
+    
+    int opcion;
+
+    printf("\n--- MENU ---\n");
+    printf("1. Agrupamiento por pais\n");
+    printf("2. Agrupamiento por continente\n");
+    printf("3. Saldo trimestral por pais\n");
+    printf("4. Resumen anual por anio\n");
+    printf("5. Listado de paises por operacion\n");
+    printf("6. Porcentaje de participacion por continente\n");
+    printf("7. Generar archivo base larga\n");
+    printf("8. Promedio trimestral por pais\n");
+    printf("9. Promedio trimestral por continente y anio\n");
+    printf("10. Salir\n");
+    printf("Seleccione una opcion: ");
+
+    scanf("%d", &opcion);
+    return opcion;
+}

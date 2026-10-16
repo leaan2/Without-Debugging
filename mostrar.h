@@ -12,4 +12,5 @@ void mostrarAnualAnio(AnualAnio *, size_t *);
 void mostrarListadoPaises(Pais *, size_t* , char* );
 void mostrarPromedioTrimestral(PromedioTrimestralPais *, size_t *);
 void mostrarPromedioContinente(PromedioTrimestralContinente *, size_t *);
+int mostrarMenu();
 #endif // MOSTRAR_H_INCLUDED
