@@ -105,17 +105,13 @@ TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *, size_t *, s
 Paises_continente* cargarPaises(Paises_continente *, size_t *, size_t *);
 Pais *lecturaAgrupamientoPais(Pais *,TransferenciaPersonal * ,size_t *, size_t *, size_t *);
 Continente *ResumenContinentes(Continente *, size_t *, Pais *, size_t *, Paises_continente *, size_t *, size_t *);
-SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, TransferenciaPersonal*, size_t *);
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, TransferenciaPersonal*, size_t *, int);
 AnualAnio *totalAnual (AnualAnio *, size_t *, size_t *, TransferenciaPersonal *, size_t *);
 AnualAnio *calculoVariacionAnual (AnualAnio *, size_t *);
 participacionContinente* porcentajeContinente (participacionContinente *, size_t *, Continente* );
-
 int vecBaseLarga (TransferenciaPersonal *, size_t *, Paises_continente *, size_t *);
-
-//punto 8
 PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *, size_t *, size_t *);
 PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *, size_t *, size_t *);
-
 PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinente*, size_t *, size_t *);
 PromedioTrimestralContinente* calculoPromedioContinente(PromedioTrimestralContinente* , size_t *);
 #endif // FUNCIONES_H_INCLUDED

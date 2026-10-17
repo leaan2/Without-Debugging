@@ -270,22 +270,14 @@ Continente *ResumenContinentes(Continente *vecRefContinente, size_t *ceContinent
     return auxContinente;
 }
 
-SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, TransferenciaPersonal*vecTransferencia, size_t *ceTransferencia)
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, TransferenciaPersonal*vecTransferencia, size_t *ceTransferencia, int anio)
 {
     SaldoTrimestral *aux = vecTrimestre;
     size_t i,j;
-    int creado=0, anio;
+    int creado=0;
     float saldo=0;
 
-    printf ("\nIngrese anio para calcular saldos trimestrales(2015 a 2026):\n");
-    scanf ("%d", &anio);
-    getchar();
-    while(anio >= 2027 || 2014 >=anio)
-    {
-        printf ("\nIngrese anio nuevamente para calcular saldos trimestrales(2015 a 2026):\n");
-        scanf ("%d", &anio);
-        getchar();
-    }
+   
 
     for(i = 0 ; i < *ceTransferencia ; i++)
     {
@@ -463,7 +455,7 @@ AnualAnio *calculoVariacionAnual (AnualAnio *vecAnual, size_t *ceAnual)
 
     for(i=0;i< *ceAnual; i++)
     {
-        if(i > 0 && (vecAnual-1)->saldo > 0)  // para evitar el primer anio
+        if(i > 0 && (vecAnual-1)->saldo != 0)  // para evitar el primer anio
         {
             vecAnual->var_pct_saldo = ((vecAnual->saldo - (vecAnual-1)->saldo)/ (vecAnual-1)->saldo) *100;
         }

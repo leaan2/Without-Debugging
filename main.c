@@ -37,7 +37,7 @@ int main()
     PromedioTrimestralContinente *vecContinentePromedioTrimestral;
     size_t capacidadContinentePromedio = 10, cantidadContinentePromedio =0;
 
-    int opcion, archivoBaseLarga=0;
+    int opcion, archivoBaseLarga=0, anio;
 
     vec = (TransferenciaPersonal *)malloc(capacidadTransferencias * sizeof(TransferenciaPersonal));
 
@@ -72,24 +72,36 @@ int main()
             case 1:
             //PUNTO 1
             vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
-            ordenarResumenPaisCredito(vecResumenPais, &cantidadResumenPais);
+            ordenarSeleccionPaisCredito(vecResumenPais, &cantidadResumenPais);
             mostrarResumenPais(vecResumenPais, &cantidadResumenPais);
             break;
 
             case 2:
             // PUNTO 2
+            if(cantidadResumenPais == 0)
+            {
+                vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
+            }
             printf("\n ----- Continentes ----- \n\n\n");
             vecContinentes = ResumenContinentes(vecContinentes, &cantidadContinentes, vecResumenPais, &cantidadResumenPais, vecPaises, &cantidadPaises, &capacidadContinentes);
             ordenarContinente(vecContinentes, &cantidadContinentes);
             mostrarContinentesGuardados(vecContinentes, &cantidadContinentes);
-            capacidadParticipacion = capacidadContinentes;
-            cantidadParticipacion = cantidadContinentes;
+            
             break;
 
             case 3:
             // PUNTO 3
-            vecTrimestre = calculoTrimestre(vecTrimestre, &cantidadTrimestre, &capacidadTrimestre, vec, &cantidadTransferencias);
-            ordenarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
+            printf ("\nIngrese anio para calcular saldos trimestrales(2015 a 2026):\n");
+            scanf ("%d", &anio);
+            getchar();
+            while(anio >= 2027 || 2014 >=anio)
+            {
+                printf ("\nIngrese anio nuevamente para calcular saldos trimestrales(2015 a 2026):\n");
+                scanf ("%d", &anio);
+                getchar();
+            }
+            vecTrimestre = calculoTrimestre(vecTrimestre, &cantidadTrimestre, &capacidadTrimestre, vec, &cantidadTransferencias, anio);
+            ordenarSaldoTrimestralInsercion(vecTrimestre, &cantidadTrimestre);
             mostrarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
             archivoTxtSaldo(vecTrimestre, &cantidadTrimestre);
             break;
@@ -105,8 +117,10 @@ int main()
 
             case 5:
             // PUNTO 5
-            // vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
-            // por si no se ingresa al punto 3 en el menu
+            if(cantidadResumenPais == 0)
+            {
+                vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
+            }
             printf("\nIndique la cantidad de paises a listar (mayor a 0, menor o igual a %zu): ", cantidadResumenPais);
             scanf("%zu", &cantidadPaisesAListar);
             while (cantidadPaisesAListar <=0 || cantidadPaisesAListar > cantidadResumenPais)
@@ -127,7 +141,7 @@ int main()
             if(Operacion == 'C')
             {
                 printf("\nOrdenando paises por credito \n\n");
-                ordenarResumenPaisCredito(vecResumenPais, &cantidadResumenPais);
+                ordenarSeleccionPaisCredito(vecResumenPais, &cantidadResumenPais);
                 mostrarListadoPaises(vecResumenPais,&cantidadPaisesAListar, &Operacion);
             }
             else
@@ -145,12 +159,15 @@ int main()
                 vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
                 vecContinentes = ResumenContinentes(vecContinentes, &cantidadContinentes, vecResumenPais, &cantidadResumenPais, vecPaises, &cantidadPaises, &capacidadContinentes);
                 ordenarContinente(vecContinentes, &cantidadContinentes);
-                capacidadParticipacion = capacidadContinentes;
-                cantidadParticipacion = cantidadContinentes;
+                
             }
+            capacidadParticipacion = capacidadContinentes;
+            cantidadParticipacion = cantidadContinentes;
             vecParticipacionContinente = porcentajeContinente(vecParticipacionContinente, &cantidadParticipacion, vecContinentes);
             ordenarParticipacion(vecParticipacionContinente, &cantidadParticipacion);
             archivoParticipacion(vecParticipacionContinente, &cantidadParticipacion);
+
+
             printf("\nIndique si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
             scanf("%d", &leerArchivo);
             while(leerArchivo != 0 && leerArchivo !=1)
@@ -166,6 +183,7 @@ int main()
 
             case 7:
             // punto 7
+            printf("\nGenerando archivo Transferencias_base_larga.csv\n");
             archivoBaseLarga =vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
             break;
 
@@ -179,6 +197,7 @@ int main()
             vecPromedioPais = calculoPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais);
             ordenarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
             mostrarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
+            break;
             case 9:
             // punto 9
             if(!archivoBaseLarga)

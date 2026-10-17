@@ -2,10 +2,10 @@
 #define ORDENAR_H_INCLUDED
 #include "funciones.h"
 
-void ordenarResumenPaisCredito(Pais *, size_t *);
+void ordenarSeleccionPaisCredito(Pais *, size_t *);
 void ordenarResumenPaisDebito(Pais *, size_t *);
 void ordenarContinente(Continente *, size_t *);
-void ordenarSaldoTrimestral(SaldoTrimestral *, size_t *);
+void ordenarSaldoTrimestralInsercion(SaldoTrimestral *, size_t *);
 void ordenarAnualAnio (AnualAnio *, size_t *);
 void ordenarParticipacion(participacionContinente *, size_t *);
 void ordenarPromedioTrimestral(PromedioTrimestralPais *, size_t *);
