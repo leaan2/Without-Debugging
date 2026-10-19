@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1792275184 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
+1792372037 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
 	"funciones.h"
 
 1792275124 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
@@ -8,7 +8,7 @@
 	<string.h>
 	<ctype.h>
 
-1792275124 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
+1792370758 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
 	"funciones.h"
 	"mostrar.h"
 	"ordenar.h"
@@ -26,7 +26,7 @@
 1792273503 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.h
 	"funciones.h"
 
-1792267013 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.c
+1792371922 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.c
 	"funciones.h"
 	"mostrar.h"
 

@@ -71,6 +71,7 @@ int main()
         switch(opcion) {
             case 1:
             //PUNTO 1
+            cantidadResumenPais=0;
             vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
             ordenarSeleccionPaisCredito(vecResumenPais, &cantidadResumenPais);
             mostrarResumenPais(vecResumenPais, &cantidadResumenPais);
@@ -83,6 +84,7 @@ int main()
                 vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais);
             }
             printf("\n ----- Continentes ----- \n\n\n");
+            cantidadContinentes=0;
             vecContinentes = ResumenContinentes(vecContinentes, &cantidadContinentes, vecResumenPais, &cantidadResumenPais, vecPaises, &cantidadPaises, &capacidadContinentes);
             ordenarContinente(vecContinentes, &cantidadContinentes);
             mostrarContinentesGuardados(vecContinentes, &cantidadContinentes);
@@ -100,6 +102,7 @@ int main()
                 scanf ("%d", &anio);
                 getchar();
             }
+            cantidadTrimestre=0;
             vecTrimestre = calculoTrimestre(vecTrimestre, &cantidadTrimestre, &capacidadTrimestre, vec, &cantidadTransferencias, anio);
             ordenarSaldoTrimestralInsercion(vecTrimestre, &cantidadTrimestre);
             mostrarSaldoTrimestral(vecTrimestre, &cantidadTrimestre);
@@ -108,6 +111,7 @@ int main()
 
             case 4:
             // PUNTO 4
+            cantidadAnual=0;
             vecAnual = totalAnual(vecAnual, &cantidadAnual, &capacidadAnual, vec, &cantidadTransferencias);
             ordenarAnualAnio (vecAnual, &cantidadAnual);
             vecAnual = calculoVariacionAnual(vecAnual, &cantidadAnual);
@@ -193,6 +197,7 @@ int main()
                 archivoBaseLarga = vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
             }
             //punto 8
+            cantidadPromedioPais=0;
             vecPromedioPais = cargaPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais);
             vecPromedioPais = calculoPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais);
             ordenarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
@@ -204,6 +209,7 @@ int main()
             {
                 archivoBaseLarga = vecBaseLarga(vec, &cantidadTransferencias, vecPaises, &cantidadPaises);
             }
+            cantidadContinentePromedio=0;
             vecContinentePromedioTrimestral = cargaPromedioContinente(vecContinentePromedioTrimestral, &cantidadContinentePromedio, &capacidadContinentePromedio);
             vecContinentePromedioTrimestral = calculoPromedioContinente(vecContinentePromedioTrimestral , &cantidadContinentePromedio);
             mostrarPromedioContinente(vecContinentePromedioTrimestral,  &cantidadContinentePromedio);

@@ -140,7 +140,8 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
 
 Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTransferencia ,size_t *ceTransferencias, size_t *cePais, size_t *capacidadPais)
 {
-    int i, j,encontrado=0;
+    int encontrado=0;
+    size_t i,j;
     Pais *aux = vecResumenPais; // para poder volver al principio del puntero
 
     for(i=0; i< *ceTransferencias; i++)
@@ -277,7 +278,7 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
     int creado=0;
     float saldo=0;
 
-   
+
 
     for(i = 0 ; i < *ceTransferencia ; i++)
     {
@@ -331,8 +332,6 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
                 }
 
                 vecTrimestre = aux + *(ceTrimestre);
-
-
 
             }
             strcpy(vecTrimestre->paisDesc, vecTransferencia->paisDesc);
@@ -609,7 +608,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
     return 1;
 }
 
-//aca arranca el codigo de verdad papá
+
 PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
     TransferenciaBaseLarga *vecBaseLarga;
     size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
@@ -643,6 +642,8 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
 
             if (tempBaseLarga == NULL) {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
+                fclose(arch);
+                free(vecBaseLarga);
                 return NULL;
             }
             vecBaseLarga = tempBaseLarga + ceBaseLarga;
@@ -708,14 +709,14 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
         //1er elemento:
         vecPromedio = tempPromedio;
         creado = 0;
-        if(vecBaseLarga->monto <= 0){
-            vecBaseLarga++;
-            continue;
-        }
+
         for(j = 0; j < *cePromedio; j++){
             if(strcmp(vecPromedio->paisCod, vecBaseLarga->paisCod) == 0 && vecPromedio->operacion == vecBaseLarga->operacion){
                 vecPromedio->suma_monto += vecBaseLarga->monto;
+
+                if(vecBaseLarga->monto > 0)
                 vecPromedio->cant_trimestres++;
+
                 creado = 1;
                 break;
             }
@@ -728,9 +729,11 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
                 tempPromedio = (PromedioTrimestralPais *)realloc(tempPromedio, *capacidadPromedio * sizeof(PromedioTrimestralPais));
 
                 if (tempPromedio == NULL) {
-                    printf("\nError: memoria insuficiente al redimensionar.\n");
-                    return NULL;
-                }
+                printf("\nError: memoria insuficiente al redimensionar.\n");
+                fclose(arch);
+                free(tempBaseLarga);
+                return NULL;
+            }
                 vecPromedio = tempPromedio + *cePromedio;
             }
             // Crear nuevo promedio
@@ -738,7 +741,15 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
             strcpy(vecPromedio->paisDesc, vecBaseLarga->paisDesc);
             vecPromedio->operacion = vecBaseLarga->operacion;
             vecPromedio->suma_monto = vecBaseLarga->monto;
+            if(vecBaseLarga->monto == 0)
+            {
+                vecPromedio->cant_trimestres = 0;
+            }
+            else
+            {
             vecPromedio->cant_trimestres = 1;
+            }
+
             (*cePromedio)++;
 
 
@@ -865,16 +876,14 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
     {
         creado = 0;
         vecTrimestralContinente = auxTrimestralContinente;
-        if(vecBaseLarga->monto <= 0){
-            vecBaseLarga++;
-            continue;
-        }
+
         for(j=0; j< *ceContinenteTrimestral; j++)
         {
             if(strcmp(vecBaseLarga->continente, vecTrimestralContinente->continente)==0 && vecTrimestralContinente->operacion == vecBaseLarga->operacion && vecTrimestralContinente->anio == vecBaseLarga->anio)
             {
                 creado = 1;
                 vecTrimestralContinente->suma_monto += vecBaseLarga->monto;
+                if(vecBaseLarga-> monto > 0)
                 vecTrimestralContinente->cant_trimestres +=1;
                 break;
             }
@@ -898,9 +907,15 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
             vecTrimestralContinente-> anio = vecBaseLarga->anio;
             vecTrimestralContinente->operacion = vecBaseLarga->operacion;
 
-            vecTrimestralContinente->cant_trimestres = 1; // primer trimestre
+
             vecTrimestralContinente->promedio=0;
             vecTrimestralContinente->suma_monto = vecBaseLarga->monto;
+            if(vecBaseLarga->monto > 0)
+            {
+                vecTrimestralContinente->cant_trimestres = 1;
+            }
+            else
+            vecTrimestralContinente->cant_trimestres = 0;
 
             (*ceContinenteTrimestral)++;
         }
@@ -921,9 +936,13 @@ PromedioTrimestralContinente* calculoPromedioContinente(PromedioTrimestralContin
     PromedioTrimestralContinente *aux = vecTrimestralContinente;
     for(i=0;i< *ce; i++)
     {
-        if(vecTrimestralContinente->suma_monto > 0)
+        if(vecTrimestralContinente->cant_trimestres > 0)
         {
             vecTrimestralContinente->promedio = vecTrimestralContinente->suma_monto / vecTrimestralContinente->cant_trimestres;
+        }
+        else
+        {
+            vecTrimestralContinente->promedio = 0.0;
         }
         vecTrimestralContinente++;
     }
