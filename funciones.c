@@ -10,7 +10,7 @@ TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *vec, size_t *
 
     if (arch == NULL)
     {
-        printf("\nError al abrir el archivo.");
+        printf("\nError al abrir el archivo transferencias_personales_clean.csv.");
         return temp;
     }
 
@@ -89,7 +89,7 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
 
     if (arch == NULL)
     {
-        printf("\nError al abrir el archivo.");
+        printf("\nError al abrir el archivo paises_continentes.csv.");
         return vec; // Retornamos el puntero original sin cambios si falla
     }
 
@@ -138,7 +138,7 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
     return temp;
 }
 
-Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTransferencia ,size_t *ceTransferencias, size_t *cePais, size_t *capacidadPais)
+Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTransferencia ,size_t *ceTransferencias, size_t *cePais, size_t *capacidadPais, int *estado)
 {
     int encontrado=0;
     size_t i,j;
@@ -177,6 +177,7 @@ Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTra
                     if(aux == NULL)
                     {
                         printf("\nError al redimensionar vecPais");
+                        *estado = SIN_MEM;
                         break;
                     }
                     vecResumenPais=aux;
@@ -205,7 +206,7 @@ Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTra
     return aux;
 }
 
-Continente *ResumenContinentes(Continente *vecRefContinente, size_t *ceContinentes, Pais *vecPaises, size_t *cePais, Paises_continente *vecPaisesCont, size_t *cePaisesCont, size_t *capacidadContinentes)
+Continente *ResumenContinentes(Continente *vecRefContinente, size_t *ceContinentes, Pais *vecPaises, size_t *cePais, Paises_continente *vecPaisesCont, size_t *cePaisesCont, size_t *capacidadContinentes, int *estado)
 {
     size_t i,j,k;
     int creado=0;
@@ -242,6 +243,7 @@ Continente *ResumenContinentes(Continente *vecRefContinente, size_t *ceContinent
                             if(auxContinente == NULL)
                             {
                                 printf("\nError al redimensionar vecRefContinente");
+                                *estado = SIN_MEM;
                                 break;
                             }
                             vecRefContinente=auxContinente;
@@ -271,7 +273,7 @@ Continente *ResumenContinentes(Continente *vecRefContinente, size_t *ceContinent
     return auxContinente;
 }
 
-SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, TransferenciaPersonal*vecTransferencia, size_t *ceTransferencia, int anio)
+SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrimestre, size_t *capacidadTrimestre, TransferenciaPersonal*vecTransferencia, size_t *ceTransferencia, int anio, int *estado)
 {
     SaldoTrimestral *aux = vecTrimestre;
     size_t i,j;
@@ -328,6 +330,7 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
                 aux = (SaldoTrimestral *) realloc(aux, *capacidadTrimestre * sizeof(SaldoTrimestral));
                 if(aux == NULL)
                 {
+                    *estado = SIN_MEM;
                     return vecTrimestre;
                 }
 
@@ -375,7 +378,7 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
 
     return aux;
 }
-AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAnual, TransferenciaPersonal *vecTransferencia, size_t *ceTransferencia)
+AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAnual, TransferenciaPersonal *vecTransferencia, size_t *ceTransferencia, int *estado)
 {
     size_t i,j;
     int creado=0;
@@ -413,6 +416,7 @@ AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAn
                     if(vecAnual == NULL)
                     {
                         printf("\nError al redimensionar el vector anual.");
+                        *estado = SIN_MEM;
                         return temp;
                     }
 
@@ -510,7 +514,7 @@ participacionContinente* porcentajeContinente (participacionContinente *vecParti
     return aux;
 }
 
-int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises_continente *vecPaises, size_t *cePaises)
+int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises_continente *vecPaises, size_t *cePaises, int *estado)
 {
     int creado =0;
     size_t ceTransBaseLarga=0, capacidadTransBaseLarga=10;
@@ -519,6 +523,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
     if(!vecTransBaseLarga)
     {
         printf("\nError al reservar memoria para transferencia base larga");
+        *estado = SIN_MEM;
         return SIN_MEM;
     }
     TransferenciaBaseLarga* auxBaseLarga = vecTransBaseLarga;
@@ -528,6 +533,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
     {
         printf("\nError al abrir archivo del punto 7");
         free(vecTransBaseLarga);
+        *estado = SIN_MEM;
         return SIN_MEM;
     }
 
@@ -561,6 +567,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
                             printf("\nError al reservar memoria nuevamente para transferencia base larga");
                             fclose(arch);
                             free(vecTransBaseLarga);
+                            *estado = SIN_MEM;
                             return SIN_MEM;
                         }
                         vecTransBaseLarga = auxBaseLarga + ceTransBaseLarga;
@@ -609,7 +616,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
 }
 
 
-PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
+PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio, int *estado) {
     TransferenciaBaseLarga *vecBaseLarga;
     size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
     FILE *arch = fopen("transferencias_base_larga.csv", "r");
@@ -622,12 +629,14 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     TransferenciaBaseLarga *tempBaseLarga = vecBaseLarga;
 
     if(!vecBaseLarga){
+        *estado = SIN_MEM;
         return NULL;
     }
 
     if (arch == NULL)
     {
         free(vecBaseLarga);
+        *estado = ERROR_ARCHIVO;
         return NULL;
     }
 
@@ -644,7 +653,8 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
                 printf("\nError: memoria insuficiente al redimensionar.\n");
                 fclose(arch);
                 free(vecBaseLarga);
-                return NULL;
+                *estado = SIN_MEM;
+                return tempPromedio;
             }
             vecBaseLarga = tempBaseLarga + ceBaseLarga;
         }
@@ -732,6 +742,7 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
                 printf("\nError: memoria insuficiente al redimensionar.\n");
                 fclose(arch);
                 free(tempBaseLarga);
+                *estado = SIN_MEM;
                 return NULL;
             }
                 vecPromedio = tempPromedio + *cePromedio;
@@ -747,14 +758,10 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
             }
             else
             {
-            vecPromedio->cant_trimestres = 1;
+                vecPromedio->cant_trimestres = 1;
             }
-
             (*cePromedio)++;
-
-
         }
-
         vecBaseLarga++;
     }
 
@@ -777,7 +784,7 @@ PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *vecPromedio, siz
 
     return tempPromedio;
 }
-PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinente* vecTrimestralContinente, size_t *ceContinenteTrimestral, size_t *capacidadContinenteTrimestral)
+PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinente* vecTrimestralContinente, size_t *ceContinenteTrimestral, size_t *capacidadContinenteTrimestral, int *estado)
 {
     TransferenciaBaseLarga *vecBaseLarga, *tempBaseLarga;
     size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
@@ -791,12 +798,14 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
     tempBaseLarga = vecBaseLarga;
 
     if(!vecBaseLarga){
+        *estado = SIN_MEM;
         return NULL;
     }
 
     if (arch == NULL)
     {
         free(vecBaseLarga);
+        *estado = ERROR_ARCHIVO;
         return NULL;
     }
 
@@ -811,6 +820,9 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
 
             if (tempBaseLarga == NULL) {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
+                fclose(arch);
+                free(vecBaseLarga);
+                *estado = SIN_MEM;
                 return NULL;
             }
             vecBaseLarga = tempBaseLarga + ceBaseLarga;
@@ -899,6 +911,7 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
 
                 if (auxTrimestralContinente == NULL) {
                     printf("\nError: memoria insuficiente al redimensionar.\n");
+                    *estado = SIN_MEM;
                     return NULL;
                 }
                 vecTrimestralContinente = auxTrimestralContinente + *ceContinenteTrimestral;

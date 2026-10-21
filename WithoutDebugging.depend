@@ -40,13 +40,13 @@
 1791837607 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\archivos.h
 	"funciones.h"
 
-1792103730 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.h
+1792616166 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1792103730 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.c
+1792616218 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\funciones.c
 	"funciones.h"
 
 1792109161 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\main.c
@@ -58,14 +58,14 @@
 1792107706 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.h
 	"funciones.h"
 
-1792103730 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.h
+1792612166 e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.h
 	"funciones.h"
 
-1792108014 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.c
+1792612165 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\mostrar.c
 	"funciones.h"
 	"mostrar.h"
 
-1792103730 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.c
+1792612166 source:e:\zmatt\mis archivos\facultad\en curso\tópicos de programación\tp transferencias personales\without-debugging\ordenar.c
 	"funciones.h"
 	"ordenar.h"
 
