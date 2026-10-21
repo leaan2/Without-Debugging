@@ -654,7 +654,7 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
                 fclose(arch);
                 free(vecBaseLarga);
                 *estado = SIN_MEM;
-                return tempPromedio;
+                return NULL;
             }
             vecBaseLarga = tempBaseLarga + ceBaseLarga;
         }
@@ -912,6 +912,8 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
                 if (auxTrimestralContinente == NULL) {
                     printf("\nError: memoria insuficiente al redimensionar.\n");
                     *estado = SIN_MEM;
+                    fclose(arch);
+                    free(vecBaseLarga);
                     return NULL;
                 }
                 vecTrimestralContinente = auxTrimestralContinente + *ceContinenteTrimestral;
@@ -940,7 +942,6 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
 
     free(tempBaseLarga);
     fclose(arch);
-
     return auxTrimestralContinente;
 }
 PromedioTrimestralContinente* calculoPromedioContinente(PromedioTrimestralContinente* vecTrimestralContinente, size_t *ce)

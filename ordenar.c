@@ -2,7 +2,7 @@
 #include "ordenar.h"
 
 
-void ordenarSeleccionPaisCredito(Pais *vec, size_t *cePais)
+void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
 {
     Pais *auxI, *auxJ, *menor, reemplazo;
     size_t i, j;

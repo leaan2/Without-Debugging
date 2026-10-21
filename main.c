@@ -37,7 +37,7 @@ int main()
     PromedioTrimestralContinente *vecContinentePromedioTrimestral;
     size_t capacidadContinentePromedio = 10, cantidadContinentePromedio =0;
 
-    int opcion, archivoBaseLarga=0, anio;
+    int opcion=0, archivoBaseLarga=0, anio;
     int estado = TODO_OK;
 
     vec = (TransferenciaPersonal *)malloc(capacidadTransferencias * sizeof(TransferenciaPersonal));
@@ -86,7 +86,7 @@ int main()
             vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vec, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais, &estado);
             if(estado == TODO_OK)
             {
-                ordenarSeleccionPaisCredito(vecResumenPais, &cantidadResumenPais);
+                ordenarPaisCreditoSeleccion(vecResumenPais, &cantidadResumenPais);
                 mostrarResumenPais(vecResumenPais, &cantidadResumenPais);
             }
             break;
@@ -174,7 +174,7 @@ int main()
                 if(Operacion == 'C')
                 {
                     printf("\nOrdenando paises por credito \n\n");
-                    ordenarSeleccionPaisCredito(vecResumenPais, &cantidadResumenPais);
+                    ordenarPaisCreditoSeleccion(vecResumenPais, &cantidadResumenPais);
                     mostrarListadoPaises(vecResumenPais,&cantidadPaisesAListar, &Operacion);
                 }
                 else

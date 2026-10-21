@@ -56,7 +56,7 @@ void mostrarContinentesGuardados(Continente *vecContinente, size_t *ceContinente
     size_t i = 0;
     printf("\n--- LISTA DE CONTINENTES GUARDADOS (%zu) ---\n", *ceContinentes);
 
-    
+
     printf("%-20s | %-10s | %-15s | %-15s\n", "CONTINENTE", "REGISTROS", "CREDITO", "DEBITO");
     printf("-------------------------------------------------------------------------\n");
 
@@ -207,9 +207,9 @@ void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
 {\
     size_t i = 0;
     printf("\n--- VISTA PREVIA PUNTO 9: PROMEDIOS POR CONTINENTE Y ANIO (%zu registros) ---\n", *ce);
-    
-    
-    printf("%-6s | %-15s | %-4s | %-12s | %-9s | %-12s\n", 
+
+
+    printf("%-6s | %-15s | %-4s | %-12s | %-9s | %-12s\n",
            "ANIO", "CONTINENTE", "OP", "SUMA MONTO", "CANT TRIM", "PROMEDIO");
     printf("----------------------------------------------------------------------------\n");
 
@@ -222,14 +222,14 @@ void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
                vec->suma_monto,
                vec->cant_trimestres,
                vec->promedio);
-        
+
         vec++;
     }
     printf("----------------------------------------------------------------------------\n");
 }
 
 int mostrarMenu(){
-    
+
     int opcion;
 
     printf("\n--- MENU ---\n");
@@ -245,6 +245,15 @@ int mostrarMenu(){
     printf("10. Salir\n");
     printf("Seleccione una opcion: ");
 
-    scanf("%d", &opcion);
+    do
+    {
+        scanf("%d", &opcion);
+        getchar ();
+        if (opcion != 1 || opcion < 1 || opcion > 10)
+        {
+            printf ("\nOpcion invalida. Seleccione una opcion correcta:\n");
+        }
+    }
+    while (opcion < 1 || opcion > 10);
     return opcion;
 }
