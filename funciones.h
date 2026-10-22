@@ -125,7 +125,7 @@ participacionContinente* porcentajeContinente (participacionContinente *, size_t
 int vecBaseLarga (TransferenciaPersonal *, size_t *, Paises_continente *, size_t *, int *);
 
 PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *, size_t *, size_t *, int *);
-PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *, size_t *, size_t *);
+PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *, size_t *);
 
 
 PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinente*, size_t *, size_t *, int*);

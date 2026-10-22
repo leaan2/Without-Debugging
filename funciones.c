@@ -537,6 +537,8 @@ participacionContinente* porcentajeContinente (participacionContinente *vecParti
 int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises_continente *vecPaises, size_t *cePaises, int *estado)
 {
     int creado =0;
+    TransferenciaBaseLarga* auxBaseLarga;
+    TransferenciaBaseLarga* tempBaseLarga;
     size_t ceTransBaseLarga=0, capacidadTransBaseLarga=10;
     size_t i,j,k;
     TransferenciaBaseLarga* vecTransBaseLarga =(TransferenciaBaseLarga *)malloc(capacidadTransBaseLarga * sizeof(TransferenciaBaseLarga));
@@ -546,8 +548,8 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
         *estado = SIN_MEM;
         return SIN_MEM;
     }
-    TransferenciaBaseLarga* auxBaseLarga = vecTransBaseLarga;
-    TransferenciaBaseLarga* tempBaseLarga = vecTransBaseLarga;
+    auxBaseLarga = vecTransBaseLarga;
+    tempBaseLarga = vecTransBaseLarga;
     Paises_continente* auxPaises = vecPaises;
     FILE *arch = fopen("transferencias_base_larga.csv", "wt");
     if(!arch)
@@ -642,7 +644,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
 
 
 PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio, int *estado) {
-    TransferenciaBaseLarga *vecBaseLarga;
+    TransferenciaBaseLarga *vecBaseLarga, *auxBaseLarga, *tempBaseLarga;
     size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
     FILE *arch = fopen("transferencias_base_larga.csv", "r");
     char linea[largoLinea];
@@ -652,8 +654,8 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     int creado = 0;
 
     vecBaseLarga = (TransferenciaBaseLarga*)malloc(capacidadBaseLarga * sizeof(TransferenciaBaseLarga));
-    TransferenciaBaseLarga *auxBaseLarga = vecBaseLarga;
-    TransferenciaBaseLarga *tempBaseLarga = vecBaseLarga;
+    auxBaseLarga = vecBaseLarga;
+    tempBaseLarga = vecBaseLarga;
 
     if(!vecBaseLarga){
         *estado = SIN_MEM;
@@ -793,7 +795,7 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     return auxPromedio;
 }
 
-PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio)
+PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio)
 {
     PromedioTrimestralPais *tempPromedio = vecPromedio;
     size_t i;

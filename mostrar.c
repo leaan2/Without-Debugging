@@ -185,7 +185,7 @@ void mostrarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePr
     printf("--------------------------------------------------------------------------------------------------------------------\n");
 }
 void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
-{\
+{
     size_t i = 0;
     printf("\n--- PROMEDIOS POR CONTINENTE Y ANIO (%zu registros) ---\n", *ce);
 

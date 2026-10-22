@@ -28,7 +28,7 @@ int main()
 
     participacionContinente* vecParticipacionContinente;
     size_t cantidadParticipacion =0, capacidadParticipacion=10;
-    int leerArchivo =0;
+    int leerArchivo = -1;
 
     PromedioTrimestralPais *vecPromedioPais;
     size_t capacidadPromedioPais = 10, cantidadPromedioPais = 0;
@@ -188,6 +188,7 @@ int main()
 
             case 6:
             // PUNTO 6
+            leerArchivo = -1;
             if(cantidadContinentes == 0)
             {
                 vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vecTransferencia, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais, &estado);
@@ -206,10 +207,12 @@ int main()
 
                 printf("\nIndique si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
                 scanf("%d", &leerArchivo);
+                getchar ();
                 while(leerArchivo != 0 && leerArchivo !=1)
                 {
                     printf("\nIndique nuevamente si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
                     scanf("%d", &leerArchivo);
+                    getchar ();
                 }
                 if (leerArchivo == 1)
                 {
@@ -237,7 +240,7 @@ int main()
             vecPromedioPais = cargaPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais, &estado);
             if (estado == TODO_OK)
             {
-                vecPromedioPais = calculoPromedio(vecPromedioPais, &cantidadPromedioPais, &capacidadPromedioPais);
+                vecPromedioPais = calculoPromedio(vecPromedioPais, &cantidadPromedioPais);
                 ordenarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
                 mostrarPromedioTrimestral(vecPromedioPais, &cantidadPromedioPais);
             }
