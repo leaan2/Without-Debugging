@@ -229,10 +229,10 @@ int mostrarMenu(){
     do
     {
         scanf("%d", &opcion);
-        getchar ();
+        while (getchar() != '\n');
         if (opcion < 1 || opcion > 10)
         {
-            printf ("\nOpcion invalida. Seleccione una opcion correcta:\n");
+            printf("\nOpcion invalida. Seleccione una opcion correcta:\n");
         }
     }
     while (opcion < 1 || opcion > 10);

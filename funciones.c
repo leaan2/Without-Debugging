@@ -793,13 +793,18 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     return auxPromedio;
 }
 
-PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio) {
+PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio)
+{
     PromedioTrimestralPais *tempPromedio = vecPromedio;
-
-    for(size_t i = 0; i < *cePromedio; i++) {
-        if(vecPromedio->cant_trimestres > 0) {
+    size_t i;
+    for(i = 0; i < *cePromedio; i++)
+    {
+        if(vecPromedio->cant_trimestres > 0)
+        {
             vecPromedio->promedio = vecPromedio->suma_monto / vecPromedio->cant_trimestres;
-        } else {
+        }
+        else
+        {
             vecPromedio->promedio = 0.0;
         }
         vecPromedio++;
@@ -807,6 +812,7 @@ PromedioTrimestralPais* calculoPromedio(PromedioTrimestralPais *vecPromedio, siz
 
     return tempPromedio;
 }
+
 PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinente* vecTrimestralContinente, size_t *ceContinenteTrimestral, size_t *capacidadContinenteTrimestral, int *estado)
 {
     TransferenciaBaseLarga *vecBaseLarga, *auxBaseLarga ,*tempBaseLarga;
