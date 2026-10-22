@@ -102,8 +102,14 @@ void mostrarAnualAnio(AnualAnio *vecAnual, size_t *ceAnual)
 
     printf("%-10s | %-15s | %-15s | %-15s | %-12s\n", "ANIO", "C", "D", "SALDO", "VAR_PCT_SALDO");
     printf("------------------------------------------------------------------------------------\n");
-
-    for(i = 0; i < *ceAnual; i++)
+    printf("%-10d | %-15.2f | %-15.2f | %-15.2f | %-12s%%\n",
+               vecAnual->anio,
+               vecAnual->credito,
+               vecAnual->debito,
+               vecAnual->saldo,
+               "-");
+    vecAnual++;
+    for(i = 1; i < *ceAnual; i++)
     {
         printf("%-10d | %-15.2f | %-15.2f | %-15.2f | %-12.2f%%\n",
                vecAnual->anio,
@@ -161,14 +167,14 @@ void mostrarBaseLargaEnMemoria(TransferenciaBaseLarga *vecBase, size_t* ceBase)
 
     printf("\n--- VISTA PREVIA DEL VECTOR EN MEMORIA (Primeros  de %zu) ---\n", *ceBase);
 
-    // Encabezado alineado
+   
     printf("%-6s | %-4s | %-4s | %-20s | %-15s | %-2s | %-10s\n",
            "ANIO", "TRIM", "COD", "PAIS", "CONTINENTE", "OP", "MONTO");
     printf("-----------------------------------------------------------------------------\n");
 
     for(i = 0; i < *ceBase; i++)
     {
-        // .20s recorta el string si es muy largo para que no rompa la tabla visualmente
+        
         printf("%-6d | %-4d | %-4s | %-20.20s | %-15.15s | %-2c | %-10.2f\n",
                vecBase->anio,
                vecBase->trimestre,
@@ -193,9 +199,10 @@ void mostrarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePr
 
     for(i = 0; i < *cePromedio; i++)
     {
-        printf("%-25s | %-15c | %-10d | %-15.2f\n",
+        printf("%-45s | %-15c | %-15.2f |%-10d | %-15.2f\n",
                vecPromedio->paisDesc,
                vecPromedio->operacion,
+               vecPromedio->suma_monto,
                vecPromedio->cant_trimestres,
                vecPromedio->promedio);
 
@@ -249,7 +256,7 @@ int mostrarMenu(){
     {
         scanf("%d", &opcion);
         getchar ();
-        if (opcion != 1 || opcion < 1 || opcion > 10)
+        if (opcion < 1 || opcion > 10)
         {
             printf ("\nOpcion invalida. Seleccione una opcion correcta:\n");
         }

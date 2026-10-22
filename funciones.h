@@ -102,8 +102,8 @@ typedef struct
 }PromedioTrimestralContinente;
 
 
-TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *, size_t *, size_t *);
-Paises_continente* cargarPaises(Paises_continente *, size_t *, size_t *);
+TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *, size_t *, size_t *, int *);
+Paises_continente* cargarPaises(Paises_continente *, size_t *, size_t *, int *);
 Pais *lecturaAgrupamientoPais(Pais *,TransferenciaPersonal * ,size_t *, size_t *, size_t *, int *);
 Continente *ResumenContinentes(Continente *, size_t *, Pais *, size_t *, Paises_continente *, size_t *, size_t *, int *);
 SaldoTrimestral *calculoTrimestre (SaldoTrimestral *, size_t *, size_t *, TransferenciaPersonal*, size_t *, int , int *);

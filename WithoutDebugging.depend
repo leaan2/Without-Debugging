@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1792372037 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
+1792641924 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.c
 	"funciones.h"
 
-1792275124 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
+1792641710 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\funciones.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
 
-1792370758 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
+1792641746 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\main.c
 	"funciones.h"
 	"mostrar.h"
 	"ordenar.h"
@@ -23,14 +23,14 @@
 1792267013 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.h
 	"funciones.h"
 
-1792273503 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.h
+1792637190 c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.h
 	"funciones.h"
 
-1792371922 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.c
+1792641596 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\mostrar.c
 	"funciones.h"
 	"mostrar.h"
 
-1792273622 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.c
+1792637190 source:c:\users\lean\desktop\facultad\topicos - cacho\withoutdebugging\ordenar.c
 	"funciones.h"
 	"ordenar.h"
 

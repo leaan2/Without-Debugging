@@ -1,7 +1,7 @@
 #include "funciones.h"
 #define largoLinea 256
 
-TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *vec, size_t *ce, size_t *capacidad)
+TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *vec, size_t *ce, size_t *capacidad, int *estado)
 {
     char linea[largoLinea];
     char *token;
@@ -25,6 +25,7 @@ TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *vec, size_t *
 
             if (temp == NULL) {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
+                *estado = ERROR_ARCHIVO;
                 break;
             }
             vec = temp + *ce;
@@ -77,10 +78,10 @@ TransferenciaPersonal* cargarTransferencias(TransferenciaPersonal *vec, size_t *
     }
 
     fclose(arch);
-    return temp; // Retornamos la dirección final (sea la original o la nueva del realloc)
+    return temp; 
 }
 
-Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capacidad)
+Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capacidad, int *estado)
 {
     char linea[largoLinea];
     char *token;
@@ -90,10 +91,10 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
     if (arch == NULL)
     {
         printf("\nError al abrir el archivo paises_continentes.csv.");
-        return vec; // Retornamos el puntero original sin cambios si falla
+        return vec; 
     }
 
-    fgets(linea, sizeof(linea), arch); // leemos la primer linea que son pais_cod, pais_desc y continente
+    fgets(linea, sizeof(linea), arch); 
 
     while (fgets(linea, sizeof(linea), arch) != NULL)
     {
@@ -105,9 +106,10 @@ Paises_continente* cargarPaises(Paises_continente *vec, size_t *ce, size_t *capa
             if (temp == NULL)
             {
                 printf("\nError: memoria insuficiente al redimensionar.\n");
+                *estado = ERROR_ARCHIVO;
                 break;
             }
-            vec = temp + *ce; // Actualizamos el puntero simple local
+            vec = temp + *ce; 
         }
 
         // 1. paisCod
@@ -142,7 +144,7 @@ Pais *lecturaAgrupamientoPais(Pais *vecResumenPais,TransferenciaPersonal *vecTra
 {
     int encontrado=0;
     size_t i,j;
-    Pais *aux = vecResumenPais; // para poder volver al principio del puntero
+    Pais *aux = vecResumenPais; 
 
     for(i=0; i< *ceTransferencias; i++)
     {
@@ -716,7 +718,7 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     vecBaseLarga = tempBaseLarga;
 
     for(i = 0; i < ceBaseLarga; i++){
-        //1er elemento:
+        
         vecPromedio = tempPromedio;
         creado = 0;
 
@@ -747,19 +749,12 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
             }
                 vecPromedio = tempPromedio + *cePromedio;
             }
-            // Crear nuevo promedio
+            
             strcpy(vecPromedio->paisCod, vecBaseLarga->paisCod);
             strcpy(vecPromedio->paisDesc, vecBaseLarga->paisDesc);
             vecPromedio->operacion = vecBaseLarga->operacion;
             vecPromedio->suma_monto = vecBaseLarga->monto;
-            if(vecBaseLarga->monto == 0)
-            {
-                vecPromedio->cant_trimestres = 0;
-            }
-            else
-            {
-                vecPromedio->cant_trimestres = 1;
-            }
+            vecPromedio->cant_trimestres = (vecBaseLarga->monto > 0.0f) ? 1 : 0;
             (*cePromedio)++;
         }
         vecBaseLarga++;
@@ -925,12 +920,8 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
 
             vecTrimestralContinente->promedio=0;
             vecTrimestralContinente->suma_monto = vecBaseLarga->monto;
-            if(vecBaseLarga->monto > 0)
-            {
-                vecTrimestralContinente->cant_trimestres = 1;
-            }
-            else
-            vecTrimestralContinente->cant_trimestres = 0;
+            
+            vecTrimestralContinente->cant_trimestres = (vecBaseLarga->monto > 0.0f) ? 1 : 0;
 
             (*ceContinenteTrimestral)++;
         }

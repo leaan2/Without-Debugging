@@ -66,8 +66,8 @@ int main()
 
     if(estado == TODO_OK) {
         // CARGA DE ARCHIVOS .CSV
-        vec = cargarTransferencias(vec, &cantidadTransferencias, &capacidadTransferencias);
-        vecPaises= cargarPaises(vecPaises, &cantidadPaises, &capacidadPaises);
+        vec = cargarTransferencias(vec, &cantidadTransferencias, &capacidadTransferencias, &estado);
+        vecPaises= cargarPaises(vecPaises, &cantidadPaises, &capacidadPaises, &estado);
 
         if(cantidadTransferencias == 0 || cantidadPaises == 0) {
             printf("No se pudieron cargar los archivos.\n");
