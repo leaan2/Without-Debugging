@@ -7,23 +7,23 @@ void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
     Pais *auxI, *auxJ, *menor, reemplazo;
     size_t i, j;
 
-    auxI = vec; // Arrancamos en el inicio del vector
+    auxI = vec; 
     for(i=0; i < (*cePais)-1; i++)
     {
         menor = auxI; 
-        auxJ = auxI + 1; // auxJ empieza un lugar a la derecha de auxI
+        auxJ = auxI + 1; 
 
-        // Buscamos el más chico en lo que queda del vector
+        
         for(j = i+1; j < *cePais; j++)
         {
             if(auxJ->total_credito > menor->total_credito)
             {
                 menor = auxJ;
             }
-            auxJ++; // Avanzamos el puntero explorador
+            auxJ++; 
         }
 
-        // Intercambiamos si encontramos uno menor
+        
         if(menor != auxI)
         {
             reemplazo = *auxI;
@@ -31,7 +31,7 @@ void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
             *menor = reemplazo;
         }
         
-        auxI++; // Avanzamos al siguiente hueco a ordenar
+        auxI++; 
     }
 }
 void ordenarResumenPaisDebito(Pais *vec, size_t *cePais)
@@ -84,30 +84,30 @@ void ordenarSaldoTrimestralInsercion(SaldoTrimestral *vecTrimestre, size_t *ceTr
     SaldoTrimestral *auxI, *auxJ, *izq, elemAIns;
     size_t i, j;
 
-    auxI = vecTrimestre + 1; // Arrancamos evaluando desde la segunda posición
+    auxI = vecTrimestre + 1; 
 
     for(i=1; i < *ceTrimestre; i++)
     {
-        elemAIns = *auxI; // Sacamos el valor a insertar
+        elemAIns = *auxI; 
         
-        auxJ = auxI;       // El hueco arranca donde sacamos el elemento
-        izq = auxI - 1;    // Miramos el elemento inmediatamente a su izquierda
+        auxJ = auxI;       
+        izq = auxI - 1;    
         j = i;
 
-        // Mientras no lleguemos al inicio y el país de la izquierda sea mayor alfabéticamente...
+        
         while(j > 0 && strcmp(izq->paisDesc, elemAIns.paisDesc) > 0)
         {
-            *auxJ = *izq; // Movemos el de la izquierda hacia la derecha
+            *auxJ = *izq; 
             
-            // Retrocedemos ambos punteros
+            
             auxJ--; 
             izq--;
             j--;
         }
         
-        *auxJ = elemAIns; // Colocamos el elemento en el hueco final
+        *auxJ = elemAIns; 
         
-        auxI++; // Avanzamos al siguiente elemento a procesar
+        auxI++; 
     }
 }
 void ordenarAnualAnio (AnualAnio *vecAnual, size_t *ceAnual)

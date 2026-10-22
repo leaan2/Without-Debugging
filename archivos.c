@@ -13,12 +13,12 @@ int archivoTxtSaldo (SaldoTrimestral *vecTrimestre, size_t *cantidadTrimeste)
 
     fprintf(arch, "--- SALDO TRIMESTRAL POR PAIS (%zu) ---\n", *cantidadTrimeste);
     fprintf(arch,"----------------------------------------------------------------------------------------\n");
-    fprintf(arch,"%-32s | %-10s | %-10s | %-10s | %-10s\n", "PAIS", "TRIM 1", "TRIM 2", "TRIM 3", "TRIM 4");
+    fprintf(arch,"%-45s | %-10s | %-10s | %-10s | %-10s\n", "PAIS", "TRIM 1", "TRIM 2", "TRIM 3", "TRIM 4");
     fprintf(arch,"----------------------------------------------------------------------------------------\n");
 
     for(i=0 ; i<*cantidadTrimeste; i++)
     {
-        fprintf(arch,"%-32s | %-10.2f | %-10.2f | %-10.2f | %-10.2f\n",
+        fprintf(arch,"%-45s | %-10.2f | %-10.2f | %-10.2f | %-10.2f\n",
                vecTrimestre->paisDesc,
                vecTrimestre->t1,
                vecTrimestre->t2,
