@@ -168,7 +168,7 @@ void mostrarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePr
     size_t i = 0;
     printf("\n--- PROMEDIO TRIMESTRAL POR PAIS (%zu) ---\n", *cePromedio);
 
-    printf(" %-45s | %-15s | %-10s | %-15s\n", "NOMBRE DEL PAIS", "OPERACIÓN", "CANT TRIM", "PROMEDIO");
+    printf(" %-45s | %-15s |%-15s |%-10s | %-15s\n", "NOMBRE DEL PAIS", "OPERACIÓN","SUMA MONTO" ,"CANT TRIM", "PROMEDIO");
     printf("--------------------------------------------------------------------------------------------------------------------\n");
 
     for(i = 0; i < *cePromedio; i++)
