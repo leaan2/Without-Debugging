@@ -1,2 +1,9 @@
 WithoutDebugging.layout
 ~$_Transferencias_Personales.docx
+WithoutDebugging.depend
+bin/Debug/WithoutDebugging.exe
+obj/Debug/archivos.o
+obj/Debug/funciones.o
+obj/Debug/main.o
+obj/Debug/mostrar.o
+obj/Debug/ordenar.o

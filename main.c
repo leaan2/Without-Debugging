@@ -206,13 +206,20 @@ int main()
                 archivoParticipacion(vecParticipacionContinente, &cantidadParticipacion);
 
                 printf("\nIndique si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
-                scanf("%d", &leerArchivo);
-                getchar ();
+                //scanf("%d", &leerArchivo);
+                //getchar ();
                 while(leerArchivo != 0 && leerArchivo !=1)
                 {
-                    printf("\nIndique nuevamente si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
-                    scanf("%d", &leerArchivo);
-                    getchar ();
+                    do
+                    {
+                        scanf("%d", &leerArchivo);
+                        while (getchar() != '\n');
+                        if (leerArchivo != 0 && leerArchivo != 1)
+                        {
+                            printf("\nIndique nuevamente si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
+                        }
+                    }
+                    while (leerArchivo != 0 && leerArchivo != 1);
                 }
                 if (leerArchivo == 1)
                 {

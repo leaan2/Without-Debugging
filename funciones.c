@@ -639,7 +639,7 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
     vecTransBaseLarga = auxBaseLarga;
     free(vecTransBaseLarga);
     fclose(arch);
-    return TODO_OK;
+    return 1;
 }
 
 
@@ -659,14 +659,14 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
 
     if(!vecBaseLarga){
         *estado = SIN_MEM;
-        return NULL;
+        return auxPromedio;
     }
 
     if (arch == NULL)
     {
         free(vecBaseLarga);
         *estado = ERROR_ARCHIVO;
-        return NULL;
+        return auxBaseLarga;
     }
 
     fgets(linea, sizeof(linea), arch);
@@ -683,7 +683,7 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
                 fclose(arch);
                 free(auxBaseLarga);
                 *estado = SIN_MEM;
-                return NULL;
+                return auxPromedio;
             }
             auxBaseLarga = tempBaseLarga;
             vecBaseLarga = tempBaseLarga + ceBaseLarga;
@@ -831,14 +831,14 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
     auxBaseLarga = vecBaseLarga;
     if(!vecBaseLarga){
         *estado = SIN_MEM;
-        return NULL;
+        return auxBaseLarga;
     }
 
     if (arch == NULL)
     {
         free(vecBaseLarga);
         *estado = ERROR_ARCHIVO;
-        return NULL;
+        return auxBaseLarga;
     }
 
     fgets(linea, sizeof(linea), arch);
