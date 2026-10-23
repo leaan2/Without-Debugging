@@ -666,7 +666,7 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     {
         free(vecBaseLarga);
         *estado = ERROR_ARCHIVO;
-        return auxBaseLarga;
+        return auxPromedio;
     }
 
     fgets(linea, sizeof(linea), arch);
@@ -831,14 +831,14 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
     auxBaseLarga = vecBaseLarga;
     if(!vecBaseLarga){
         *estado = SIN_MEM;
-        return auxBaseLarga;
+        return auxTrimestralContinente;
     }
 
     if (arch == NULL)
     {
         free(vecBaseLarga);
         *estado = ERROR_ARCHIVO;
-        return auxBaseLarga;
+        return auxTrimestralContinente;
     }
 
     fgets(linea, sizeof(linea), arch);
@@ -855,7 +855,7 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
                 fclose(arch);
                 free(auxBaseLarga);
                 *estado = SIN_MEM;
-                return vecTrimestralContinente;
+                return auxTrimestralContinente;
             }
             auxBaseLarga = tempBaseLarga;
             vecBaseLarga = auxBaseLarga + ceBaseLarga;
