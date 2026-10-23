@@ -75,8 +75,6 @@ int main()
         }
     }
 
-
-
     while(estado == TODO_OK && opcion != 10) {
         opcion = mostrarMenu();
         switch(opcion) {
@@ -105,8 +103,6 @@ int main()
                 ordenarContinente(vecContinentes, &cantidadContinentes);
                 mostrarContinentesGuardados(vecContinentes, &cantidadContinentes);
             }
-
-
 
             break;
 
@@ -148,16 +144,19 @@ int main()
 
             case 5:
             // PUNTO 5
+            cantidadPaisesAListar = 0;
             if(cantidadResumenPais == 0)
             {
                 vecResumenPais = lecturaAgrupamientoPais(vecResumenPais, vecTransferencia, &cantidadTransferencias, &cantidadResumenPais, &capacidadResumenPais, &estado);
             }
             printf("\nIndique la cantidad de paises a listar (mayor a 0, menor o igual a %zu): ", cantidadResumenPais);
             scanf("%zu", &cantidadPaisesAListar);
+            while(getchar() != '\n');
             while (cantidadPaisesAListar <=0 || cantidadPaisesAListar > cantidadResumenPais)
             {
                 printf("\nIndique nuevamente la cantidad de paises a listar (mayor a 0, menor o igual a %zu): ", cantidadResumenPais);
                 scanf("%zu", &cantidadPaisesAListar);
+                while(getchar() != '\n');
             }
             printf("\nIngrese tipo de operacion ('C' para Credito, 'D' para Debito): ");
             scanf(" %c", &Operacion);
@@ -206,8 +205,6 @@ int main()
                 archivoParticipacion(vecParticipacionContinente, &cantidadParticipacion);
 
                 printf("\nIndique si quiere leer el archivo partipacion continentes (1 para SI, 0 para NO): \n");
-                //scanf("%d", &leerArchivo);
-                //getchar ();
                 while(leerArchivo != 0 && leerArchivo !=1)
                 {
                     do
@@ -284,7 +281,6 @@ int main()
             break;
         }
     }
-
 
     free(vecTransferencia);
     free(vecPaises);

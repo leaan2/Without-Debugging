@@ -7,3 +7,16 @@ obj/Debug/funciones.o
 obj/Debug/main.o
 obj/Debug/mostrar.o
 obj/Debug/ordenar.o
+WithoutDebugging.layout
+WithoutDebugging.depend
+bin/Debug/WithoutDebugging.exe
+build/Debug/archivos.o
+build/Debug/funciones.o
+build/Debug/main.o
+build/Debug/mostrar.o
+build/Debug/ordenar.o
+obj/Debug/archivos.o
+obj/Debug/funciones.o
+obj/Debug/main.o
+obj/Debug/mostrar.o
+obj/Debug/ordenar.o
