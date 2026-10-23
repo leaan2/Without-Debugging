@@ -1,7 +1,6 @@
 #include "funciones.h"
 #include "ordenar.h"
 
-
 void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
 {
     Pais *auxI, *auxJ, *menor, reemplazo;
@@ -13,7 +12,6 @@ void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
         menor = auxI; 
         auxJ = auxI + 1; 
 
-        
         for(j = i+1; j < *cePais; j++)
         {
             if(auxJ->total_credito > menor->total_credito)
@@ -23,7 +21,6 @@ void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
             auxJ++; 
         }
 
-        
         if(menor != auxI)
         {
             reemplazo = *auxI;
@@ -34,6 +31,7 @@ void ordenarPaisCreditoSeleccion(Pais *vec, size_t *cePais)
         auxI++; 
     }
 }
+
 void ordenarResumenPaisDebito(Pais *vec, size_t *cePais)
 {
     Pais *aux, reemplazo;
@@ -54,8 +52,6 @@ void ordenarResumenPaisDebito(Pais *vec, size_t *cePais)
         }
     }
 }
-
-
 
 void ordenarContinente(Continente *vecContinente, size_t *ceContinente)
 {
@@ -94,22 +90,19 @@ void ordenarSaldoTrimestralInsercion(SaldoTrimestral *vecTrimestre, size_t *ceTr
         izq = auxI - 1;    
         j = i;
 
-        
         while(j > 0 && strcmp(izq->paisDesc, elemAIns.paisDesc) > 0)
         {
             *auxJ = *izq; 
-            
-            
             auxJ--; 
             izq--;
             j--;
         }
         
         *auxJ = elemAIns; 
-        
         auxI++; 
     }
 }
+
 void ordenarAnualAnio (AnualAnio *vecAnual, size_t *ceAnual)
 {
    AnualAnio *aux, reemplazo;
@@ -121,14 +114,13 @@ void ordenarAnualAnio (AnualAnio *vecAnual, size_t *ceAnual)
         for(j=0 ; j< *ceAnual-i-1 ; j++)
         {
             if(aux->anio > (aux+1)->anio)
-             {
+            {
                 reemplazo = *(aux+1);
                 *(aux+1) = *aux;
                 *aux = reemplazo;
-             }
-             aux++;
+            }
+            aux++;
         }
-
     }
 }
 
@@ -165,16 +157,12 @@ void ordenarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePr
         for(j=0 ; j< *cePromedio-i-1 ; j++)
         {
             if(strcmp(aux->paisDesc, (aux+1)->paisDesc)>0)
-             {
+            {
                 reemplazo = *(aux+1);
                 *(aux+1) = *aux;
                 *aux = reemplazo;
-             }
-             aux++;
+            }
+            aux++;
         }
     }
 }
-
-
-
-

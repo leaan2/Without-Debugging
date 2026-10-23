@@ -6,7 +6,6 @@ void mostrarTransferencias(TransferenciaPersonal *vec, size_t* ce)
     size_t i = 0;
     printf("\n--- Registros cargados: %zu ---\n", *ce);
 
-
     for (i = 0; i < *ce; i++)
     {
         printf("Anio: %d | Trim: %d | Pais: %s (%s) | Operacion: %c | Monto: %.2f\n", vec->anio, vec->trimestre, vec->paisCod, vec->paisDesc, vec->operacion, vec->monto);
@@ -20,7 +19,6 @@ void mostrarPaises(Paises_continente *vec, size_t* ce)
     size_t i = 0;
     printf("\n--- Registros cargados: %zu ---\n", *ce);
 
-
     for (i = 0; i < *ce; i++)
     {
         printf("Pais: %s (%s) |Continente: %s\n", vec->paisCod, vec->paisDesc, vec->continente);
@@ -29,13 +27,10 @@ void mostrarPaises(Paises_continente *vec, size_t* ce)
     printf("--------------------------------\n");
 }
 
-
-
 void mostrarResumenPais(Pais *vec, size_t* cePais)
 {
     size_t i = 0;
     printf("\n--- LISTA DE PAISES GUARDADOS (%zu) ---\n", *cePais);
-
 
     printf("%-5s | %-45s | %-10s | %-15s | %-15s\n", "COD", "NOMBRE DEL PAIS", "REGISTROS", "CREDITO", "DEBITO");
     printf("--------------------------------------------------------------------------------------------------------------------\n");
@@ -44,7 +39,6 @@ void mostrarResumenPais(Pais *vec, size_t* cePais)
     {
 
         printf("%-5s | %-45s | %-10d | %-15.2f | %-15.2f\n", vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_credito, vec->total_debito);
-
 
         vec++;
     }
@@ -55,7 +49,6 @@ void mostrarContinentesGuardados(Continente *vecContinente, size_t *ceContinente
 {
     size_t i = 0;
     printf("\n--- LISTA DE CONTINENTES GUARDADOS (%zu) ---\n", *ceContinentes);
-
 
     printf("%-20s | %-10s | %-15s | %-15s\n", "CONTINENTE", "REGISTROS", "CREDITO", "DEBITO");
     printf("-------------------------------------------------------------------------\n");
@@ -74,7 +67,6 @@ void mostrarSaldoTrimestral(SaldoTrimestral *vec, size_t *ce)
     size_t i = 0;
     printf("\n--- SALDO TRIMESTRAL POR PAIS (%zu) ---\n", *ce);
 
-
     printf("%-45s | %-12s | %-12s | %-12s | %-12s\n", "PAIS", "TRIM 1", "TRIM 2", "TRIM 3", "TRIM 4");
     printf("--------------------------------------------------------------------------------------------------------------------\n");
 
@@ -87,18 +79,15 @@ void mostrarSaldoTrimestral(SaldoTrimestral *vec, size_t *ce)
                vec->t3,
                vec->t4);
 
-
         vec++;
     }
     printf("--------------------------------------------------------------------------------------------------------------------\n");
 }
 
-
 void mostrarAnualAnio(AnualAnio *vecAnual, size_t *ceAnual)
 {
     size_t i = 0;
     printf("\n--- RESUMEN ANUAL DE OPERACIONES (%zu) ---\n", *ceAnual);
-
 
     printf("%-10s | %-15s | %-15s | %-15s | %-12s\n", "ANIO", "C", "D", "SALDO", "VAR_PCT_SALDO");
     printf("------------------------------------------------------------------------------------\n");
@@ -117,7 +106,6 @@ void mostrarAnualAnio(AnualAnio *vecAnual, size_t *ceAnual)
                vecAnual->debito,
                vecAnual->saldo,
                vecAnual->var_pct_saldo);
-
 
         vecAnual++;
     }
@@ -138,11 +126,9 @@ void mostrarListadoPaises(Pais *vec, size_t* cePais, char* Operacion)
 
             printf("%-10zu | %-5s | %-25s | %-10d | %-15.2f\n", i + 1, vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_credito);
 
-
             vec++;
         }
         printf("--------------------------------------------------------------------------------------\n");
-
     }
     else
     {
@@ -152,8 +138,6 @@ void mostrarListadoPaises(Pais *vec, size_t* cePais, char* Operacion)
         {
 
             printf("%-10zu | %-5s | %-25s | %-10d | %-15.2f\n", i + 1, vec->paisCod, vec->paisDesc, vec->cantRegistros, vec->total_debito);
-
-
             vec++;
         }
         printf("--------------------------------------------------------------------------------------\n");
@@ -161,7 +145,6 @@ void mostrarListadoPaises(Pais *vec, size_t* cePais, char* Operacion)
     }
 
 }
-
 
 void mostrarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePromedio)
 {
@@ -184,11 +167,11 @@ void mostrarPromedioTrimestral(PromedioTrimestralPais *vecPromedio, size_t *cePr
     }
     printf("--------------------------------------------------------------------------------------------------------------------\n");
 }
+
 void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
 {
     size_t i = 0;
     printf("\n--- PROMEDIOS POR CONTINENTE Y ANIO (%zu registros) ---\n", *ce);
-
 
     printf("%-6s | %-15s | %-4s | %-12s | %-9s | %-12s\n",
            "ANIO", "CONTINENTE", "OP", "SUMA MONTO", "CANT TRIM", "PROMEDIO");
@@ -209,8 +192,8 @@ void mostrarPromedioContinente(PromedioTrimestralContinente *vec, size_t *ce)
     printf("----------------------------------------------------------------------------\n");
 }
 
-int mostrarMenu(){
-
+int mostrarMenu()
+{
     int opcion;
 
     printf("\n--- MENU ---\n");

@@ -33,7 +33,6 @@ int main()
     PromedioTrimestralPais *vecPromedioPais;
     size_t capacidadPromedioPais = 10, cantidadPromedioPais = 0;
 
-
     PromedioTrimestralContinente *vecContinentePromedioTrimestral;
     size_t capacidadContinentePromedio = 10, cantidadContinentePromedio =0;
 
@@ -64,20 +63,24 @@ int main()
         estado = SIN_MEM;
     }
 
-    if(estado == TODO_OK) {
+    if(estado == TODO_OK) 
+    {
         // CARGA DE ARCHIVOS .CSV
         vecTransferencia = cargarTransferencias(vecTransferencia, &cantidadTransferencias, &capacidadTransferencias, &estado);
         vecPaises= cargarPaises(vecPaises, &cantidadPaises, &capacidadPaises, &estado);
 
-        if(cantidadTransferencias == 0 || cantidadPaises == 0) {
+        if(cantidadTransferencias == 0 || cantidadPaises == 0) 
+        {
             printf("No se pudieron cargar los archivos.\n");
             estado = ERROR_ARCHIVO;
         }
     }
 
-    while(estado == TODO_OK && opcion != 10) {
+    while(estado == TODO_OK && opcion != 10) 
+    {
         opcion = mostrarMenu();
-        switch(opcion) {
+        switch(opcion) 
+        {
             case 1:
             //PUNTO 1
             cantidadResumenPais=0;

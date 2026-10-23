@@ -29,7 +29,6 @@ int archivoTxtSaldo (SaldoTrimestral *vecTrimestre, size_t *cantidadTrimeste)
     }
     fprintf(arch,"----------------------------------------------------------------------------------------");
 
-
     fclose(arch);
     return 1;
 }
@@ -44,15 +43,11 @@ int archivoParticipacion(participacionContinente* vecParticipacionContinente, si
         return SIN_MEM;
     }
 
-
-
     for(i=0 ; i<*ceParticipacion; i++)
     {
         fwrite(vecParticipacionContinente, sizeof(participacionContinente), 1, arch);
         vecParticipacionContinente++;
     }
-
-
 
     fclose(arch);
     return 1;
@@ -89,7 +84,6 @@ int mostrarParticipacionContinente()
     }
 
     printf("-------------------------------------------------\n");
-
 
     fclose(arch);
     free(continenteLeido);

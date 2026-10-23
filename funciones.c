@@ -285,8 +285,6 @@ SaldoTrimestral *calculoTrimestre (SaldoTrimestral *vecTrimestre, size_t *ceTrim
     int creado=0;
     float saldo=0;
 
-
-
     for(i = 0 ; i < *ceTransferencia ; i++)
     {
         creado = 0;
@@ -435,13 +433,10 @@ AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAn
                 vecAnual->saldo = 0;
                 vecAnual->var_pct_saldo = 0;
 
-
                 if(vecTransferencia->operacion == 'C')
                 vecAnual->credito += vecTransferencia->monto;
                 else
                 vecAnual->debito +=vecTransferencia->monto;
-
-
 
                 *ceAnual+=1;
             }
@@ -449,9 +444,6 @@ AnualAnio *totalAnual (AnualAnio *vecAnual, size_t *ceAnual, size_t *capacidadAn
         creado = 0;
         vecTransferencia++;
     }
-
-
-
 
     return aux;
 }
@@ -512,8 +504,6 @@ participacionContinente* porcentajeContinente (participacionContinente *vecParti
     }
     vecParticipacionContinente= aux;
 
-
-
     for(i =*ceParticipacion; i > 0;i--)
     {
         if (sumaCredito > 0)
@@ -528,8 +518,6 @@ participacionContinente* porcentajeContinente (participacionContinente *vecParti
 
         vecParticipacionContinente++;
     }
-
-
 
     return aux;
 }
@@ -579,7 +567,6 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
                     }
                     vecTransBaseLarga++;
                 }
-
 
                 if(creado==0)
                 {
@@ -635,15 +622,14 @@ int vecBaseLarga (TransferenciaPersonal *vecPersonal, size_t *cePersonal, Paises
         vecTransBaseLarga++;
     }
 
-
     vecTransBaseLarga = auxBaseLarga;
     free(vecTransBaseLarga);
     fclose(arch);
     return 1;
 }
 
-
-PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio, int *estado) {
+PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_t *cePromedio, size_t *capacidadPromedio, int *estado)
+{
     TransferenciaBaseLarga *vecBaseLarga, *auxBaseLarga, *tempBaseLarga;
     size_t ceBaseLarga = 0, capacidadBaseLarga = 10, i, j;
     FILE *arch = fopen("transferencias_base_larga.csv", "r");
@@ -657,7 +643,8 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
     auxBaseLarga = vecBaseLarga;
     tempBaseLarga = vecBaseLarga;
 
-    if(!vecBaseLarga){
+    if(!vecBaseLarga)
+    {
         *estado = SIN_MEM;
         return auxPromedio;
     }
@@ -745,12 +732,13 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
 
     vecBaseLarga = tempBaseLarga;
 
-    for(i = 0; i < ceBaseLarga; i++){
-
+    for(i = 0; i < ceBaseLarga; i++)
+    {
         vecPromedio = auxPromedio;
         creado = 0;
 
-        for(j = 0; j < *cePromedio; j++){
+        for(j = 0; j < *cePromedio; j++)
+        {
             if(strcmp(vecPromedio->paisCod, vecBaseLarga->paisCod) == 0 && vecPromedio->operacion == vecBaseLarga->operacion){
                 vecPromedio->suma_monto += vecBaseLarga->monto;
 
@@ -762,8 +750,8 @@ PromedioTrimestralPais* cargaPromedio(PromedioTrimestralPais *vecPromedio, size_
             }
             vecPromedio++;
         }
-        if(!creado){
-
+        if(!creado)
+        {
             if(*cePromedio == *capacidadPromedio)
             {
                 *capacidadPromedio *= 2;
@@ -829,7 +817,8 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
     vecBaseLarga = (TransferenciaBaseLarga*)malloc(capacidadBaseLarga * sizeof(TransferenciaBaseLarga));
     tempBaseLarga = vecBaseLarga;
     auxBaseLarga = vecBaseLarga;
-    if(!vecBaseLarga){
+    if(!vecBaseLarga)
+    {
         *estado = SIN_MEM;
         return auxTrimestralContinente;
     }
@@ -938,7 +927,8 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
 
         if (creado==0 )
         {
-            if(*ceContinenteTrimestral == *capacidadContinenteTrimestral){
+            if(*ceContinenteTrimestral == *capacidadContinenteTrimestral)
+            {
                 *capacidadContinenteTrimestral *= 2;
                 tempTrimestralContinente = (PromedioTrimestralContinente *)realloc(auxTrimestralContinente, *capacidadContinenteTrimestral * sizeof(PromedioTrimestralContinente));
 
@@ -969,12 +959,11 @@ PromedioTrimestralContinente* cargaPromedioContinente(PromedioTrimestralContinen
         vecBaseLarga++;
     }
 
-
-
     free(tempBaseLarga);
     fclose(arch);
     return auxTrimestralContinente;
 }
+
 PromedioTrimestralContinente* calculoPromedioContinente(PromedioTrimestralContinente* vecTrimestralContinente, size_t *ce)
 {
     size_t i;
@@ -994,4 +983,3 @@ PromedioTrimestralContinente* calculoPromedioContinente(PromedioTrimestralContin
 
     return aux;
 }
-
